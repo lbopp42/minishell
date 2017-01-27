@@ -6,20 +6,19 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 12:39:49 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/27 13:53:43 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/27 15:40:01 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-#include <stdio.h>
 
 void	create_lst(t_lst **lst, char *array)
 {
 	if (!(*lst = (t_lst*)malloc(sizeof(t_lst))))
 		return;
 	(*lst)->name = ft_strcdup(array, '=');
-	(*lst)->content = ft_strchr(array, '=') + 1;
+	printf("[+]%s\n", (*lst)->name);
+	(*lst)->content = ft_strdup(ft_strchr(array, '=') + 1);
 	(*lst)->next = NULL;
 }
 
@@ -44,4 +43,14 @@ t_lst	*tab_to_list(char *array[])
 		i++;
 	}
 	return (lst);
+}
+
+void	del_lst(t_lst *lst)
+{
+	if (lst->next != NULL)
+		del_lst(lst->next);
+	printf("[-]%s\n", lst->name);
+	free(lst->content);
+	free(lst->name);
+	free(lst);
 }
