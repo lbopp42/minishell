@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 16:31:45 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/25 16:56:19 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/27 16:43:48 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_unsetenv(t_lst *env, char *name)
 		if (!ft_strcmp(env->name, name))
 		{
 			free(env->name);
+			free(env->content);
 			if (tmp != NULL)
 				tmp->next = env->next;
 			free(env);
