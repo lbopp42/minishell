@@ -6,7 +6,7 @@
 #    By: lbopp <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/27 09:06:43 by lbopp             #+#    #+#              #
-#    Updated: 2017/01/27 10:53:56 by lbopp            ###   ########.fr        #
+#    Updated: 2017/01/27 16:06:07 by lbopp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME = minishell
 CFLAGS = -Wall -Werror -Wextra -g
 LIBFT = libft/
 CC = clang
-SRC_NAME = exec_command.c\
+SRC_NAME = error.c\
+		   exec_command.c\
 		   ft_cd.c\
 		   ft_echo.c\
 		   ft_env.c\

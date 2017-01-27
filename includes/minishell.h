@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 09:11:33 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/27 15:23:11 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/27 16:04:10 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct	s_lst
 void	add_lst(t_lst **lst, char *array);
 void	create_lst(t_lst **lst, char *array);
 void	del_lst(t_lst *lst);
+int		error_arg_env(void);
 void	exec_command(char *array[], int ac, char *av[], char *env[]);
 void	ft_cd(char **array, char *env[]);
 void	ft_echo(char **array);
