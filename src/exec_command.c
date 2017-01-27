@@ -6,11 +6,24 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 10:30:28 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/27 11:03:40 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/27 13:21:30 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	free_array(char **array)
+{
+	int i;
+
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}
 
 char	*get_path(char *env[], char *command)
 {
@@ -28,8 +41,7 @@ char	*get_path(char *env[], char *command)
 			break;
 		i++;
 	}
-	printf("path = [%s]\n", env[i]);
-	path = ft_strchr(env[i], '=') + 1;
+	path = ft_strdup(ft_strchr(env[i], '=') + 1);
 	array = ft_strsplit(path, ':');
 	i = 0;
 	while (array[i])
@@ -39,8 +51,10 @@ char	*get_path(char *env[], char *command)
 		path = ft_stradd(path, command);
 		if ((ret = access(path, F_OK)) == 0)
 			break;
+		free(path);
 		i++;
 	}
+	free_array(array);
 	if (ret != 0)
 	{
 		ft_putendstr_fd("minishell: command not found: ", command, 2);
@@ -55,6 +69,7 @@ void	exec_command(char *array[], int ac, char *av[], char *env[])
 	int		signal;
 	pid_t	father;
 
+	path = NULL;
 	if (ft_strchr(array[0], '/') || env[0] == NULL)
 	{
 		if (access(array[0], F_OK) == 0)
@@ -65,8 +80,6 @@ void	exec_command(char *array[], int ac, char *av[], char *env[])
 			write(2, "\n", 1);
 		}
 	}
-	else
-		path = get_path(env, array[0]);
 	father = fork();
 	if (father > 0)
 	{
@@ -74,5 +87,10 @@ void	exec_command(char *array[], int ac, char *av[], char *env[])
 		minishell(ac, av, env);
 	}
 	if (father == 0)
-		execve(path, array, env);
+	{
+		if (path)
+			execve(path, array, env);
+		else
+			execve(get_path(env, array[0]), array, env);
+	}
 }

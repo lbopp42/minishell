@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 11:02:32 by lbopp             #+#    #+#             */
-/*   Updated: 2016/11/12 15:28:34 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/27 12:39:06 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int		ft_trimsize(char const *s, int start, char c)
 		return (i - start);
 }
 
-static char		*ft_trimnews(const char *s, int start, int len, char *news)
+static char		*ft_trimnews(char const *s, int start, int len, char *news)
 {
 	int i;
 

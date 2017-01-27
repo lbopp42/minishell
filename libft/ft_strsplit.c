@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 15:27:12 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/21 18:45:05 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/27 13:10:53 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,21 +83,23 @@ static	char	**ft_letter(char const *s, char c, char **array)
 	return (array);
 }
 
-char			**ft_strsplit(char const *s, char c)
+char			**ft_strsplit(char *s, char c)
 {
 	int		i;
 	int		word;
 	char	**array;
+	char	*new;
 
 	i = 0;
 	word = 0;
 	if (!(s))
 		return (NULL);
-	if (!(s = ft_strtrimchar(s, c)))
+	if (!(new = ft_strtrimchar(s, c)))
 		return (0);
-	if (!(array = (char**)malloc(sizeof(char*) * (ft_word(s, c) + 1))))
+	free(s);
+	if (!(array = (char**)malloc(sizeof(char*) * (ft_word(new, c) + 1))))
 		return (0);
-	if (!(array = ft_letter(s, c, array)))
+	if (!(array = ft_letter(new, c, array)))
 		return (0);
-	return (ft_fill(s, array, c));
+	return (ft_fill(new, array, c));
 }

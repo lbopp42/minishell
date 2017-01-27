@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 13:45:55 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/25 16:04:01 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/27 14:48:10 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,23 +59,31 @@ void	create_line(t_lst *lst, char ***array)
 	}
 }
 
-char	**list_to_tab(t_lst *lst)
+int		lst_size(t_lst *lst)
 {
-	int		size;
-	char	**array;
-	t_lst	*origin;
+	int size;
 
-	origin = lst;
 	size = 0;
 	while (lst != NULL)
 	{
 		size++;
 		lst = lst->next;
 	}
+	return (size);
+}
+
+char	**list_to_tab(t_lst *lst)
+{
+	char	**array;
+	t_lst	*origin;
+	int		size;
+
+	origin = lst;
+	array = NULL;
+	size = lst_size(lst);
 	if (!(array = (char**)malloc(sizeof(char*) * size + 1)))
 		return (NULL);
-	array[size] = 0;
-	lst = origin;
+	array[size] = NULL;
 	create_line(lst, &array);
 	lst = origin;
 	array = fill_lst(lst, array);

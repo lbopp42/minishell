@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 09:04:19 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/27 10:50:12 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/27 12:37:49 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ int	main(int ac, char *av[], char *env[])
 	(void)ac;
 	(void)av;
 	(void)env;
-	minishell(env);
+	minishell(ac, av, env);
 	return (1);
 }

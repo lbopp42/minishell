@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 12:39:49 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/25 14:58:39 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/27 13:53:43 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,17 @@ void	add_lst(t_lst **lst, char *array)
 		add_lst(&((*lst)->next), array);
 }
 
-void	tab_to_list(char *array[], t_lst **lst)
+t_lst	*tab_to_list(char *array[])
 {
 	int		i;
+	t_lst	*lst;
 
-	*lst = NULL;
+	lst = NULL;
 	i = 0;
 	while (array[i])
 	{
-		add_lst(lst, array[i]);
+		add_lst(&lst, array[i]);
 		i++;
 	}
+	return (lst);
 }
