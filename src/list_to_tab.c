@@ -1,0 +1,83 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_to_tab.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/25 13:45:55 by lbopp             #+#    #+#             */
+/*   Updated: 2017/01/25 16:04:01 by lbopp            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+#include <stdio.h>
+
+char	**fill_lst(t_lst *lst, char **array)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	i = 0;
+	while (lst != NULL)
+	{
+		j = 0;
+		k = 0;
+		while (lst->name[j])
+		{
+			array[i][j] = lst->name[j];
+			j++;
+		}
+		array[i][j] = '=';
+		while (lst->content[k])
+		{
+			array[i][j + 1 + k] = lst->content[k];
+			k++;
+		}
+		array[i][j + 1 + k] = '\0';
+		i++;
+		lst = lst->next;
+	}
+	return (array);
+}
+
+void	create_line(t_lst *lst, char ***array)
+{
+	int	size;
+	int	i;
+
+	i = 0;
+	while (lst != NULL)
+	{
+		size = ft_strlen(lst->name) + ft_strlen(lst->content) + 1;
+		if (!((*array)[i] = (char*)malloc(sizeof(char) * size + 1)))
+			return ;
+		i++;
+		lst = lst->next;
+	}
+}
+
+char	**list_to_tab(t_lst *lst)
+{
+	int		size;
+	char	**array;
+	t_lst	*origin;
+
+	origin = lst;
+	size = 0;
+	while (lst != NULL)
+	{
+		size++;
+		lst = lst->next;
+	}
+	if (!(array = (char**)malloc(sizeof(char*) * size + 1)))
+		return (NULL);
+	array[size] = 0;
+	lst = origin;
+	create_line(lst, &array);
+	lst = origin;
+	array = fill_lst(lst, array);
+	return (array);
+}
