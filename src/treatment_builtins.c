@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 09:38:40 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/27 16:05:46 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/27 16:50:20 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	treatment_builtins(char *array[], char **env[])
 	}
 	else if (!ft_strcmp(array[0], "unsetenv"))
 	{
-		lst = tab_to_list(*env); //TODO free this lst
+		lst = tab_to_list(*env);
 		ft_unsetenv(lst, array[1]);
 		*env = list_to_tab(lst);
 		del_lst(lst);
