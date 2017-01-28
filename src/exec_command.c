@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 10:30:28 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/28 12:55:26 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/28 14:22:07 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ void	exec_command(char *array[], int ac, char *av[], char *env[])
 	char	*path;
 	int		signal;
 	pid_t	father;
+	int		erreur;
 
+	erreur = 0;
 	path = NULL;
 	if (ft_strchr(array[0], '/') || env[0] == NULL)
 	{
@@ -76,6 +78,7 @@ void	exec_command(char *array[], int ac, char *av[], char *env[])
 			path = ft_strdup(array[0]);
 		else
 		{
+			erreur = 1;
 			ft_putendstr_fd("minishell: command not found: ", array[0], 2);
 			write(2, "\n", 1);
 		}
@@ -92,7 +95,9 @@ void	exec_command(char *array[], int ac, char *av[], char *env[])
 	{
 		if (path)
 			execve(path, array, env);
-		else
+		else if (erreur == 0)
 			execve(get_path(env, array[0]), array, env);
+		else
+			erreur = 0;
 	}
 }
