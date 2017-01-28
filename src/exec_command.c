@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 10:30:28 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/27 13:21:30 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/28 12:55:26 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ void	exec_command(char *array[], int ac, char *av[], char *env[])
 	if (father > 0)
 	{
 		wait(&signal);
+		if (WIFSIGNALED(signal))
+			print_signal(signal);
 		minishell(ac, av, env);
 	}
 	if (father == 0)

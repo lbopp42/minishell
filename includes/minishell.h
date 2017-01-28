@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 09:11:33 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/27 16:04:10 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/28 14:14:09 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char	*get_env_var(char *origin, char *env[]);
 char	*get_path(char *env[], char *command);
 char	**list_to_tab(t_lst *lst);
 void	minishell(int ac, char *av[], char *env[]);
+void	print_signal(int signum);
 t_lst	*ft_setenv(t_lst *env, char *var, char *valeur);
 t_lst	*tab_to_list(char *array[]);
 int		treatment_builtins(char *array[], char **env[]);
