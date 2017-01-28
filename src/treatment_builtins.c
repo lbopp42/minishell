@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 09:38:40 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/27 16:50:20 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/28 16:34:02 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	treatment_builtins(char *array[], char **env[])
 
 	lst = NULL;
 	if (!ft_strcmp(array[0], "cd"))
-		ft_cd(array, *env);
+		ft_cd(array, env);
 	else if (!ft_strcmp(array[0], "echo"))
 		ft_echo(array);
 	else if (!ft_strcmp(array[0], "exit"))

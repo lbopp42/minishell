@@ -6,7 +6,7 @@
 #    By: lbopp <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/27 09:06:43 by lbopp             #+#    #+#              #
-#    Updated: 2017/01/27 16:06:07 by lbopp            ###   ########.fr        #
+#    Updated: 2017/01/28 14:13:42 by lbopp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SRC_NAME = error.c\
 		   main.c\
 		   minishell.c\
 		   parssing_env.c\
-		   setenv.c
+		   setenv.c\
+		   signal.c
 SRC_PATH = src
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(SRC:.c=.o)
