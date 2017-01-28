@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 09:11:33 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/28 17:06:00 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/28 17:40:14 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ typedef struct	s_lst
 }				t_lst;
 
 void	add_lst(t_lst **lst, char *array);
-t_lst	*change_oldpwd(t_lst *env, char *buf);
-t_lst	*change_pwd(t_lst *env);
+void	change_oldpwd(t_lst *env, char *buf);
+void	change_pwd(t_lst *env);
 void	create_lst(t_lst **lst, char *array);
 void	del_lst(t_lst *lst);
 int		error_arg_env(void);

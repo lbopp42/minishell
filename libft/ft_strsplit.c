@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 15:27:12 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/27 13:10:53 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/28 17:46:43 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int		ft_word(char const *s, char c)
 	return (word);
 }
 
-static	char	**ft_fill(char const *s, char **array, char c)
+static	char	**ft_fill(char *s, char **array, char c)
 {
 	int i;
 	int letter;
@@ -55,6 +55,7 @@ static	char	**ft_fill(char const *s, char **array, char c)
 		word++;
 	}
 	array[word] = 0;
+	free(s);
 	return (array);
 }
 

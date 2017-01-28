@@ -6,13 +6,13 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 08:53:00 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/28 17:05:50 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/28 17:08:30 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_lst	*change_oldpwd(t_lst *env, char *buf)
+void	change_oldpwd(t_lst *env, char *buf)
 {
 	t_lst	*origin;
 
@@ -31,15 +31,14 @@ t_lst	*change_oldpwd(t_lst *env, char *buf)
 	if (ft_strcmp(env->name, "OLDPWD"))
 	{
 		if (!(env->next = (t_lst*)malloc(sizeof(t_lst))))
-			return (NULL);
+			return ;
 		env->next->name = ft_strdup("OLDPWD");
 		env->next->content = ft_strdup(buf);
 		env->next->next = NULL;
 	}
-	return (origin);
 }
 
-t_lst	*change_pwd(t_lst *env)
+void	change_pwd(t_lst *env)
 {
 	char	buf[256];
 	t_lst	*origin;
@@ -61,12 +60,11 @@ t_lst	*change_pwd(t_lst *env)
 	if (ft_strcmp(env->name, "PWD"))
 	{
 		if (!(env->next = (t_lst*)malloc(sizeof(t_lst))))
-			return (NULL);
+			return ;
 		env->next->name = ft_strdup("PWD");
 		env->next->content = ft_strdup(buf);
 		env->next->next = NULL;
 	}
-	return (origin);
 }
 
 void	ft_cd(char **array, char **env[])
@@ -84,8 +82,8 @@ void	ft_cd(char **array, char **env[])
 		ret = chdir(array[1]);
 		if (ret != -1)
 		{
-			env_lst = change_pwd(env_lst);
-			env_lst = change_oldpwd(env_lst, buf);
+			change_pwd(env_lst);
+			change_oldpwd(env_lst, buf);
 		}
 	}
 	else
@@ -94,8 +92,8 @@ void	ft_cd(char **array, char **env[])
 			ret = chdir(get_env_var("$HOME", *env));
 			if (ret != -1)
 			{
-				env_lst = change_pwd(env_lst);
-				env_lst = change_oldpwd(env_lst, buf);
+				change_pwd(env_lst);
+				change_oldpwd(env_lst, buf);
 			}
 		}
 	*env = list_to_tab(env_lst);

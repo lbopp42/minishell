@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 10:30:28 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/28 14:22:07 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/28 17:40:12 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	*get_path(char *env[], char *command)
 		if ((ret = access(path, F_OK)) == 0)
 			break;
 		free(path);
+		path = NULL;
 		i++;
 	}
 	free_array(array);
@@ -81,23 +82,23 @@ void	exec_command(char *array[], int ac, char *av[], char *env[])
 			erreur = 1;
 			ft_putendstr_fd("minishell: command not found: ", array[0], 2);
 			write(2, "\n", 1);
+			return ;
 		}
 	}
-	father = fork();
-	if (father > 0)
+	if (path == NULL)
+		path = get_path(env, array[0]);
+	if (path != NULL)
 	{
-		wait(&signal);
-		if (WIFSIGNALED(signal))
-			print_signal(signal);
-		minishell(ac, av, env);
-	}
-	if (father == 0)
-	{
-		if (path)
+		father = fork();
+		if (father > 0)
+		{
+			wait(&signal);
+			if (WIFSIGNALED(signal))
+				print_signal(signal);
+			minishell(ac, av, env);
+		}
+		if (father == 0)
 			execve(path, array, env);
-		else if (erreur == 0)
-			execve(get_path(env, array[0]), array, env);
-		else
-			erreur = 0;
 	}
+	minishell(ac, av, env);
 }

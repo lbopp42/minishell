@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 10:58:35 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/27 12:39:34 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/28 17:44:25 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void			ft_lstdel(t_list **alst, void (*del)(void*, size_t));
 void			ft_lstadd(t_list **alst, t_list *new);
 void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
-char			*ft_strtrimchar(char const *s, char c);
+char			*ft_strtrimchar(char *s, char c);
 int				ft_abs(int n);
 int				ft_power(int nb, int pow);
 size_t			ft_nbrlen(int n);

@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 11:02:32 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/27 12:39:06 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/28 17:45:53 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static char		*ft_trimnews(char const *s, int start, int len, char *news)
 	return (news);
 }
 
-char			*ft_strtrimchar(char const *s, char c)
+char			*ft_strtrimchar(char *s, char c)
 {
 	char	*news;
 	int		i;
