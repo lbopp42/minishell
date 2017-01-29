@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 10:30:28 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/28 17:40:12 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/29 17:29:11 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	exec_command(char *array[], int ac, char *av[], char *env[])
 			erreur = 1;
 			ft_putendstr_fd("minishell: command not found: ", array[0], 2);
 			write(2, "\n", 1);
+			minishell(ac, av, env);
 			return ;
 		}
 	}
