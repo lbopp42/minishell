@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 09:09:11 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/28 17:19:32 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/29 11:07:59 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	minishell(int ac, char *av[], char *env[])
 	{
 		array = ft_whitespaces(line);
 		free(line);
+		array = parssing_var(array, env);
 		if (array[0] != NULL && treatment_builtins(array, &env) == 1)
 			minishell(ac, av, env);
 		else if (array[0] != NULL && treatment_builtins(array, &env) == 0)

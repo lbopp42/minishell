@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 13:11:57 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/27 10:56:09 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/29 15:16:28 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,38 +27,59 @@ char	*get_env_var(char *origin, char *env[])
 	return (NULL);
 }
 
-void	parssing_var(char **tab[], char *env[])
+char	**parssing_var(char *tab[], char *env[])
 {
-	int		i;
-	int		j;
-	int		k;
-	char	*var;
+	int		wd;
+	int		let;
+	int		size;
+	int		tmp;
+	char	*var_test;
+	char	*string;
 
-	i = 1;
-	j = 0;
-	while ((*tab)[i])
+	(void)env;
+	wd = 1;
+	while (tab[wd])
 	{
-		k = 0;
-		printf("TEST\n");
-		while ((*tab)[i][k])
+		size = 0;
+		let = 0;
+		while (tab[wd][let])
 		{
-			if ((*tab)[i][k] == '$')
+			if (tab[wd][let] == '$')
 			{
-				k++;
-				while ((*tab)[i][k + j] && (*tab)[i][k + j] >= 65 &&
-						(*tab)[i][k + j] <= 90)
+				let += 1;
+				tmp = 0;
+				while (tab[wd][let + tmp] && ft_isalpha(tab[wd][let + tmp]))
 				{
-					j++;
+					size++;
+					tmp++;
 				}
-				var = ft_strcdup(&((*tab)[i][k]), (*tab)[i][k + j]);
-				printf("var = %s\n", var);
+				printf("size = %d\n", size);
+				if (!(var_test = (char*)malloc(sizeof(char) * size + 1)))
+					return (NULL);
+				var_test = ft_strncpy(var_test, &(tab[wd][let]), size);
+				var_test[size] = '\0';
+				printf("[var = %s]\n", var_test);
+				printf("taille avant = %d\n", let - 1);
+				printf("apres = %c\n", tab[wd][let + tmp]);
+				printf("La taille d'apres = %zu\n", ft_strlen(&tab[wd][let + tmp]));
+				if (ft_isenv(env, var_test))
+				{
+					//size = let - 1 + ft_strlen(&tab[wd][let + tmp]) +
+					//	ft_strlen(get_env_var(var_test + 1, env));
+					tab[wd][let - 1] = '\0';
+					//if (!(string = (char*)malloc(sizeof(char) * size)))
+					//	return (NULL);
+					string = ft_strdup(&tab[wd][0]);
+					printf("string1= [%s]\n", string);
+					string = ft_stradd(string, get_env_var(var_test, env));
+					printf("string2= [%s]\n", string);
+					string = ft_stradd(string, &tab[wd][let + tmp]);
+					printf("string final= [%s]\n", string);
+				}
 			}
-			k++;
-			if (get_env_var(var, env))
-			{
-				
-			}
+			let++;
 		}
-		i++;
+		wd++;
 	}
+	return (tab);
 }
