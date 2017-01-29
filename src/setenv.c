@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 15:33:09 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/27 16:02:46 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/29 16:27:45 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_lst	*ft_setenv(t_lst *env, char *var, char *valeur)
 	{
 		free(env->content);
 		env->content = ft_strdup(valeur);
-		return (NULL);
+		return (tmp);
 	}
 	if (!(env->next = (t_lst*)malloc(sizeof(t_lst))))
 		return (NULL);
