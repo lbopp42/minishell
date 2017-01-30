@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 09:11:33 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/30 11:03:17 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/30 17:08:42 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	add_lst(t_lst **lst, char *array);
 void	change_oldpwd(t_lst *env, char *buf);
 void	change_pwd(t_lst *env);
 void	create_lst(t_lst **lst, char *array);
+void	del_array(char *array[]);
 void	del_lst(t_lst *lst);
 int		error_arg_env(void);
 void	exec_command(char *array[], int ac, char *av[], char *env[]);
