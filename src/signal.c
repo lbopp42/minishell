@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/28 12:42:05 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/28 14:15:13 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/30 17:25:06 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_signal(int signum)
 	int		array[] = {SIGABRT, SIGALRM, SIGBUS, SIGFPE, SIGHUP,
 	SIGILL, SIGINT, SIGKILL, SIGPROF, SIGQUIT, SIGSEGV,
 	SIGSTOP, SIGSYS, SIGTERM, SIGTRAP, SIGTSTP, SIGTTIN, SIGTTOU, SIGUSR1,
-	SIGUSR2, SIGVTALRM, SIGXCPU, SIGXFSZ};
+	SIGUSR2, SIGVTALRM, SIGXCPU, SIGXFSZ, 0};
 	char	*err_sign[] = {"Abort\n", "Alarm\n", "Bus error\n",
 	"Floting point exception\n", "Hangup\n", "Illegal hardware instruction\n",
 	"\n", "Killed\n", "Profile signal\n", "Quit\n", "Segmentation fault\n",

@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 09:09:11 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/30 17:11:53 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/30 17:22:18 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	minishell(int ac, char *av[], char *env[])
 	array = NULL;
 	while (42)
 	{
+		signal(SIGINT, signal_handle);
 		write(1, "$> ", 3);
 		get_next_line(0, &line);
-		signal(SIGINT, signal_handle);
 		if (!line[0])
 		{
 			free(line);
