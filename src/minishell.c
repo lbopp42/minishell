@@ -6,11 +6,17 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 09:09:11 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/29 16:56:47 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/30 13:34:42 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	handle_signal(int signal)
+{
+	(void)signal;
+	return ;
+}
 
 void	minishell(int ac, char *av[], char *env[])
 {
@@ -20,7 +26,9 @@ void	minishell(int ac, char *av[], char *env[])
 	line = NULL;
 	array = NULL;
 	write(1, "$> ", 3);
+
 	get_next_line(0, &line);
+	signal(SIGINT, handle_signal);
 	if (!line[0])
 		minishell(ac, av, env);
 	else

@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 13:11:57 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/30 11:03:33 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/30 15:53:40 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ char	**transf_var(int *let, char *env[], int *wd, char *tab[])
 	*let += 1;
 	tmp = 0;
 	size = 0;
-	while (tab[*wd][*let + tmp] && ft_isalnum(tab[*wd][*let + tmp]))
+	while (tab[*wd][*let + tmp] && (ft_isalnum(tab[*wd][*let + tmp])
+			|| tab[*wd][*let + tmp] == '_'))
 	{
 		size++;
 		tmp++;
@@ -61,9 +62,8 @@ char	**transf_var(int *let, char *env[], int *wd, char *tab[])
 	if (ft_isenv(env, var_test))
 		string = ft_stradd(string, get_env_var(var_test, env));
 	string = ft_stradd(string, &tab[*wd][*let + tmp]);
-	tab = transf_var2(tab, wd, var_test, string);
 	*let -= 2;
-	return (tab);
+	return (transf_var2(tab, wd, var_test, string));
 }
 
 char	**parssing_var(char *tab[], char *env[])
