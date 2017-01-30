@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 13:11:57 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/29 16:58:24 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/30 10:37:34 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ char	*get_env_var(char *origin, char *env[])
 	return (NULL);
 }
 
+void	transf_var()
+
 char	**parssing_var(char *tab[], char *env[])
 {
 	int		wd;
@@ -36,7 +38,6 @@ char	**parssing_var(char *tab[], char *env[])
 	char	*var_test;
 	char	*string;
 
-	(void)env;
 	wd = 1;
 	while (tab[wd])
 	{
@@ -48,7 +49,7 @@ char	**parssing_var(char *tab[], char *env[])
 			{
 				let += 1;
 				tmp = 0;
-				while (tab[wd][let + tmp] && ft_isalpha(tab[wd][let + tmp]))
+				while (tab[wd][let + tmp] && ft_isalnum(tab[wd][let + tmp]))
 				{
 					size++;
 					tmp++;
@@ -63,9 +64,11 @@ char	**parssing_var(char *tab[], char *env[])
 					string = ft_stradd(string, get_env_var(var_test, env));
 				string = ft_stradd(string, &tab[wd][let + tmp]);
 				free(tab[wd]);
-				if (!((char*)malloc(sizeof(char) * ft_strlen(string))))
-					return (NULL);
-				tab[wd] = string;
+				free(var_test);
+				string[ft_strlen(string)] = '\0';
+				tab[wd] = ft_strdup(string);
+				free(string);
+				let -= 2;
 			}
 			let++;
 		}
