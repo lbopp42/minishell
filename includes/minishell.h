@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 09:11:33 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/29 11:07:55 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/30 11:03:17 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ char	**parssing_var(char *tab[], char *env[]);
 void	print_signal(int signum);
 t_lst	*ft_setenv(t_lst *env, char *var, char *valeur);
 t_lst	*tab_to_list(char *array[]);
+char	**transf_var(int *let, char *env[], int *wd, char *tab[]);
+char	**transf_var2(char *tab[], int *wd, char *var_test, char *string);
 int		treatment_builtins(char *array[], char **env[]);
 
 #endif
