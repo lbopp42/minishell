@@ -6,7 +6,7 @@
 #    By: lbopp <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/27 09:06:43 by lbopp             #+#    #+#              #
-#    Updated: 2017/01/28 14:13:42 by lbopp            ###   ########.fr        #
+#    Updated: 2017/01/31 09:10:39 by lbopp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRC_NAME = error.c\
 		   ft_cd.c\
 		   ft_echo.c\
 		   ft_env.c\
+		   ft_exit.c\
 		   ft_unsetenv.c\
 		   list_to_tab.c\
 		   tab_to_list.c\

@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 09:11:33 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/30 17:08:42 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/31 09:09:08 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	exec_command(char *array[], int ac, char *av[], char *env[]);
 void	ft_cd(char **array, char **env[]);
 void	ft_echo(char **array);
 void	ft_env(char *env[]);
+void	ft_exit(void);
 void	ft_unsetenv(t_lst *env, char *name);
 char	*get_env_var(char *origin, char *env[]);
 char	*get_path(char *env[], char *command);
