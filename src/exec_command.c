@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 10:30:28 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/29 17:29:11 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/01 09:14:57 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*get_path(char *env[], char *command)
 	return (path);
 }
 
-void	exec_command(char *array[], int ac, char *av[], char *env[])
+void	exec_command(char *array[], char *env[])
 {
 	char	*path;
 	int		signal;
@@ -82,7 +82,6 @@ void	exec_command(char *array[], int ac, char *av[], char *env[])
 			erreur = 1;
 			ft_putendstr_fd("minishell: command not found: ", array[0], 2);
 			write(2, "\n", 1);
-			minishell(ac, av, env);
 			return ;
 		}
 	}
@@ -96,10 +95,10 @@ void	exec_command(char *array[], int ac, char *av[], char *env[])
 			wait(&signal);
 			if (WIFSIGNALED(signal))
 				print_signal(signal);
-			minishell(ac, av, env);
+			return ;
 		}
 		if (father == 0)
 			execve(path, array, env);
 	}
-	minishell(ac, av, env);
+	return;
 }

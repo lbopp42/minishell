@@ -6,7 +6,7 @@
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 09:09:11 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/30 17:22:18 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/01/31 09:33:46 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	signal_handle(int signal)
 	return ;
 }
 
-void	minishell(int ac, char *av[], char *env[])
+void	minishell(char *env[])
 {
 	char	*line;
 	char	**array;
@@ -46,6 +46,6 @@ void	minishell(int ac, char *av[], char *env[])
 		else if (array && treatment_builtins(array, &env) == 0)
 			exit(EXIT_SUCCESS);
 		else
-			exec_command(array, ac, av, env);
+			exec_command(array, env);
 	}
 }
