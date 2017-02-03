@@ -6,7 +6,7 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 09:45:43 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/03 12:52:36 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/03 14:14:38 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		valid_quote(char *s, int i, char par)
 	return (-1);
 }
 
-void	ft_fill(char *s, char ***array, char c)
+void	ft_fillsplit(char *s, char ***array, char c)
 {
 	int	var[4];
 
@@ -75,7 +75,7 @@ void	count_letter(char *s, int *i, int *letter)
 	}
 }
 
-void	ft_letter(char *s, char ***array, int i, char c)
+void	ft_lettersplit(char *s, char ***array, int i, char c)
 {
 	int letter;
 	int word;
@@ -108,8 +108,8 @@ char	**ft_strsplitquote(char *s, char c)
 	word = ft_countwordchar(string, c);
 	if (!(array = (char**)ft_memalloc(sizeof(char*) * (word + 1))))
 		return (0);
-	ft_letter(string, &array, 0, c);
-	ft_fill(string, &array, c);
+	ft_lettersplit(string, &array, 0, c);
+	ft_fillsplit(string, &array, c);
 	free(string);
 	return (array);
 }

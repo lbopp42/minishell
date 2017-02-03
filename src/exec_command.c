@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 10:30:28 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/01 09:14:57 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/03 14:56:14 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	exec_command(char *array[], char *env[])
 			wait(&signal);
 			if (WIFSIGNALED(signal))
 				print_signal(signal);
+			free(path);
 			return ;
 		}
 		if (father == 0)

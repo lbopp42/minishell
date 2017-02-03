@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 09:04:19 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/27 12:37:49 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/03 13:42:23 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ int	main(int ac, char *av[], char *env[])
 	(void)ac;
 	(void)av;
 	(void)env;
-	minishell(ac, av, env);
+	minishell(env);
 	return (1);
 }

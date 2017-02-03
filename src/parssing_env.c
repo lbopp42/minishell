@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parssing_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 13:11:57 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/30 15:53:40 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/03 15:02:02 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	**parssing_var(char *tab[], char *env[])
 				tab = transf_var(&let, env, &wd, tab);
 			let++;
 		}
-		wd++;
+		tab[wd] ? wd++ : 0;
 	}
 	return (tab);
 }

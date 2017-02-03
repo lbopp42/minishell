@@ -6,7 +6,7 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 09:09:11 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/02 13:19:57 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/03 15:02:05 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	minishell(char *env[])
 	char	**array;
 	int		i;
 
-	i = 0;
 	line = NULL;
 	array = NULL;
 	while (42)
@@ -40,11 +39,12 @@ void	minishell(char *env[])
 		}
 		array = ft_strsplitquote(line, ';');
 		free(line);
+		i = 0;
 		while (array[i])
 		{
 			command = ft_whitespaces(array[i]);
 			command = parssing_var(command, env);
-			if (command && treatment_builtins(command, &env) == 1)
+			if (command && treatment_builtins(command, &env) == 1) //Maybe del a if
 			{
 				del_array(command);
 				i++;
@@ -54,6 +54,7 @@ void	minishell(char *env[])
 				exit(EXIT_SUCCESS);
 			else
 				exec_command(command, env);
+			del_array(command);
 			i++;
 		}
 		del_array(array);
