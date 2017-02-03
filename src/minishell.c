@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 09:09:11 by lbopp             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2017/01/31 09:33:46 by lbopp            ###   ########.fr       */
-=======
-/*   Updated: 2017/02/02 09:02:10 by lbopp            ###   ########.fr       */
->>>>>>> a01527d... add ft_strsplitquote.c
+/*   Updated: 2017/02/02 13:19:57 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +21,11 @@ void	signal_handle(int signal)
 void	minishell(char *env[])
 {
 	char	*line;
+	char	**command;
 	char	**array;
+	int		i;
 
+	i = 0;
 	line = NULL;
 	array = NULL;
 	while (42)
@@ -39,17 +38,24 @@ void	minishell(char *env[])
 			free(line);
 			continue ;
 		}
-		array = ft_whitespaces(line);
+		array = ft_strsplitquote(line, ';');
 		free(line);
-		array = parssing_var(array, env);
-		if (array && treatment_builtins(array, &env) == 1)
+		while (array[i])
 		{
-			del_array(array);
-			continue ;
+			command = ft_whitespaces(array[i]);
+			command = parssing_var(command, env);
+			if (command && treatment_builtins(command, &env) == 1)
+			{
+				del_array(command);
+				i++;
+				continue ;
+			}
+			else if (command && treatment_builtins(command, &env) == 0)
+				exit(EXIT_SUCCESS);
+			else
+				exec_command(command, env);
+			i++;
 		}
-		else if (array && treatment_builtins(array, &env) == 0)
-			exit(EXIT_SUCCESS);
-		else
-			exec_command(array, env);
+		del_array(array);
 	}
 }

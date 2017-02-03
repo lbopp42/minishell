@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 09:11:33 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/31 09:09:08 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/02 13:21:00 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	create_lst(t_lst **lst, char *array);
 void	del_array(char *array[]);
 void	del_lst(t_lst *lst);
 int		error_arg_env(void);
-void	exec_command(char *array[], int ac, char *av[], char *env[]);
+void	exec_command(char *array[], char *env[]);
 void	ft_cd(char **array, char **env[]);
 void	ft_echo(char **array);
 void	ft_env(char *env[]);
@@ -39,7 +39,7 @@ void	ft_unsetenv(t_lst *env, char *name);
 char	*get_env_var(char *origin, char *env[]);
 char	*get_path(char *env[], char *command);
 char	**list_to_tab(t_lst *lst);
-void	minishell(int ac, char *av[], char *env[]);
+void	minishell(char *env[]);
 char	**parssing_var(char *tab[], char *env[]);
 void	print_signal(int signum);
 t_lst	*ft_setenv(t_lst *env, char *var, char *valeur);
