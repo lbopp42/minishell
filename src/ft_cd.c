@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 08:53:00 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/28 17:08:30 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/03 17:06:49 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,40 +67,46 @@ void	change_pwd(t_lst *env)
 	}
 }
 
+#include <stdio.h>
+
 void	ft_cd(char **array, char **env[])
 {
 	int		ret;
 	t_lst	*env_lst;
 	char	buf[256];
+	char	*path;
 
 	ret = 0;
+	path = NULL;
 	env_lst = tab_to_list(*env);
 	ft_bzero(buf, 256);
 	getcwd(buf, 256);
-	if (array[1])
+	if (array[1] && ft_strcmp(array[1], "-"))
 	{
+		printf("ICI\n");
 		ret = chdir(array[1]);
-		if (ret != -1)
-		{
-			change_pwd(env_lst);
-			change_oldpwd(env_lst, buf);
-		}
 	}
 	else
-		if (get_env_var("$HOME", *env))
-		{
-			ret = chdir(get_env_var("$HOME", *env));
-			if (ret != -1)
-			{
-				change_pwd(env_lst);
-				change_oldpwd(env_lst, buf);
-			}
-		}
-	*env = list_to_tab(env_lst);
-	del_lst(env_lst);
-	if (ret == -1)
+	{
+		if (array[1] && !ft_strcmp(array[1], "-"))
+			path = get_env_var("$OLDPWD", *env);
+		else
+			path = get_env_var("$HOME", *env);
+		ret = chdir(path);
+	}
+	if (ret != -1)
+	{
+		change_pwd(env_lst);
+		change_oldpwd(env_lst, buf);
+		if (array[1] && !ft_strcmp(array[1], "-"))
+			ft_putendl(get_env_var("$OLDPWD", *env));
+	}
+	else
 	{
 		ft_putstr("cd: no such file or directory: ");
-		ft_putendl(array[1]);
+		path = path ? path : array[1];
+		ft_putendl(path);
 	}
+	*env = list_to_tab(env_lst);
+	del_lst(env_lst);
 }

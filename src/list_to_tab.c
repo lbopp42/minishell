@@ -6,13 +6,13 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 13:45:55 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/02 11:17:19 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/03 17:01:22 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**fill_lst(t_lst *lst, char **array)
+void	fill_lst(t_lst *lst, char ***array)
 {
 	int	i;
 	int	j;
@@ -25,20 +25,18 @@ char	**fill_lst(t_lst *lst, char **array)
 		k = 0;
 		while (lst->name[j])
 		{
-			array[i][j] = lst->name[j];
+			(*array)[i][j] = lst->name[j];
 			j++;
 		}
-		array[i][j] = '=';
+		(*array)[i][j] = '=';
 		while (lst->content[k])
 		{
-			array[i][j + 1 + k] = lst->content[k];
+			(*array)[i][j + 1 + k] = lst->content[k];
 			k++;
 		}
-		array[i][j + 1 + k] = '\0';
 		i++;
 		lst = lst->next;
 	}
-	return (array);
 }
 
 void	create_line(t_lst *lst, char ***array)
@@ -50,7 +48,7 @@ void	create_line(t_lst *lst, char ***array)
 	while (lst != NULL)
 	{
 		size = ft_strlen(lst->name) + ft_strlen(lst->content) + 1;
-		if (!((*array)[i] = (char*)malloc(sizeof(char) * size + 1)))
+		if (!((*array)[i] = (char*)ft_memalloc(size + 1)))
 			return ;
 		i++;
 		lst = lst->next;
@@ -79,12 +77,11 @@ char	**list_to_tab(t_lst *lst)
 	origin = lst;
 	array = NULL;
 	size = lst_size(lst);
-	if (!(array = (char**)malloc(sizeof(char*) * (size + 1))))
+	if (!(array = (char**)ft_memalloc(sizeof(char*) * (size + 1))))
 		return (NULL);
-	array[size] = NULL;
 	create_line(lst, &array);
 	lst = origin;
-	array = fill_lst(lst, array);
+	fill_lst(lst, &array);
 	return (array);
 }
 
@@ -98,5 +95,6 @@ void	del_array(char *array[])
 		free(array[i]);
 		i++;
 	}
+	free(array[i]);
 	free(array);
 }
