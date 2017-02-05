@@ -6,7 +6,7 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 10:58:35 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/03 12:19:27 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/05 15:45:50 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ typedef struct	s_list
 	size_t			content_size;
 	struct s_list	*next;
 }				t_list;
+typedef struct	s_lst
+{
+	char			*name;
+	char			*content;
+	struct s_lst	*next;
+}				t_lst;
 
 void			*ft_memset(void *b, int c, size_t len);
 void			ft_bzero(void *s, size_t n);
@@ -98,7 +104,7 @@ void			ft_putendstr(char const *s1, char const *s2);
 void			ft_putendstr_fd(char const *s1, char const *s2, int fd);
 int				ft_isspace(int c);
 char			**ft_whitespaces(char const *s);
-int				ft_isenv(char *env[], char *var);
+int				ft_isenv(t_lst *env, char *var);
 int				ft_countwordchar(char *s, char c);
 char			**ft_strsplitquote(char *s, char c);
 

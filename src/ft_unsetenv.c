@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unsetenv.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 16:31:45 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/27 16:43:48 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/05 15:43:43 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 
 void	ft_unsetenv(t_lst *env, char *name)
 {
-	t_lst *tmp;
+	t_lst	*tmp;
+	t_lst	*origin;
 
+	origin = env;
 	tmp = NULL;
 	tmp = env;
 	while (env != NULL)
@@ -34,4 +36,5 @@ void	ft_unsetenv(t_lst *env, char *name)
 		tmp = env;
 		env = env->next;
 	}
+	env = origin;
 }

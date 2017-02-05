@@ -3,23 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 16:04:27 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/27 14:16:18 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/05 15:49:23 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_env(char *env[])
+void	ft_env(t_lst *env)
 {
-	int	i;
+	t_lst	*origin;
 
-	i = 0;
-	while (env[i])
+	origin = env;
+	while (env != NULL)
 	{
-		ft_putendl(env[i]);
-		i++;
+		ft_putendch(env->name, '=');
+		ft_putendl(env->content);
+		env = env->next;
 	}
+	env = origin;
 }

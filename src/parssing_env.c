@@ -6,23 +6,20 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 13:11:57 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/03 15:02:02 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/05 15:26:59 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <stdio.h>
 
-char	*get_env_var(char *origin, char *env[])
+char	*get_env_var(char *origin, t_lst *env_lst)
 {
-	int i;
-
-	i = 0;
-	while (env[i])
+	while (env_lst != NULL)
 	{
-		if (ft_strstr(env[i], origin + 1))
-			return (ft_strchr(env[i], '=') + 1);
-		i++;
+		if (!ft_strcmp(env_lst->name, origin + 1))
+			return (env_lst->content);
+		env_lst = env_lst->next;
 	}
 	return (NULL);
 }
@@ -37,7 +34,7 @@ char	**transf_var2(char *tab[], int *wd, char *var_test, char *string)
 	return (tab);
 }
 
-char	**transf_var(int *let, char *env[], int *wd, char *tab[])
+char	**transf_var(int *let, t_lst *env_lst, int *wd, char *tab[])
 {
 	int		tmp;
 	char	*string;
@@ -59,14 +56,14 @@ char	**transf_var(int *let, char *env[], int *wd, char *tab[])
 	var_test[size] = '\0';
 	tab[*wd][*let - 1] = '\0';
 	string = ft_strdup(&tab[*wd][0]);
-	if (ft_isenv(env, var_test))
-		string = ft_stradd(string, get_env_var(var_test, env));
+	if (ft_isenv(env_lst, var_test))
+		string = ft_stradd(string, get_env_var(var_test, env_lst));
 	string = ft_stradd(string, &tab[*wd][*let + tmp]);
 	*let -= 2;
 	return (transf_var2(tab, wd, var_test, string));
 }
 
-char	**parssing_var(char *tab[], char *env[])
+char	**parssing_var(char *tab[], t_lst *env_lst)
 {
 	int		wd;
 	int		let;
@@ -78,7 +75,7 @@ char	**parssing_var(char *tab[], char *env[])
 		while (tab[wd][let])
 		{
 			if (tab[wd][let] == '$')
-				tab = transf_var(&let, env, &wd, tab);
+				tab = transf_var(&let, env_lst, &wd, tab);
 			let++;
 		}
 		tab[wd] ? wd++ : 0;

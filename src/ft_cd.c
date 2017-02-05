@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 08:53:00 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/28 17:08:30 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/05 15:40:33 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	change_oldpwd(t_lst *env, char *buf)
 		env->next->content = ft_strdup(buf);
 		env->next->next = NULL;
 	}
+	env = origin;
 }
 
 void	change_pwd(t_lst *env)
@@ -65,16 +66,17 @@ void	change_pwd(t_lst *env)
 		env->next->content = ft_strdup(buf);
 		env->next->next = NULL;
 	}
+	env = origin;
 }
 
-void	ft_cd(char **array, char **env[])
+void	ft_cd(char **array, t_lst *env_lst)
 {
 	int		ret;
-	t_lst	*env_lst;
 	char	buf[256];
+	t_lst	*origin;
 
+	origin = env_lst;
 	ret = 0;
-	env_lst = tab_to_list(*env);
 	ft_bzero(buf, 256);
 	getcwd(buf, 256);
 	if (array[1])
@@ -87,20 +89,19 @@ void	ft_cd(char **array, char **env[])
 		}
 	}
 	else
-		if (get_env_var("$HOME", *env))
+		if (get_env_var("$HOME", env_lst))
 		{
-			ret = chdir(get_env_var("$HOME", *env));
+			ret = chdir(get_env_var("$HOME", env_lst));
 			if (ret != -1)
 			{
 				change_pwd(env_lst);
 				change_oldpwd(env_lst, buf);
 			}
 		}
-	*env = list_to_tab(env_lst);
-	del_lst(env_lst);
 	if (ret == -1)
 	{
 		ft_putstr("cd: no such file or directory: ");
 		ft_putendl(array[1]);
 	}
+	env_lst = origin;
 }

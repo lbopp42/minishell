@@ -6,43 +6,30 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 10:30:28 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/03 14:56:14 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/05 15:57:21 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_array(char **array)
+char	*get_path(t_lst *env, char *command)
 {
-	int i;
-
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
-}
-
-char	*get_path(char *env[], char *command)
-{
-	int		i;
 	char	*path;
 	char	**array;
 	int		ret;
+	t_lst	*origin;
+	int		i;
 
-	i = 0;
+	origin = env;
 	if (env == NULL)
 		return(command);
-	while (env[i])
+	while (env != NULL)
 	{
-		if (!ft_strncmp(env[i], "PATH", 4))
+		if (!ft_strcmp(env->name, "PATH"))
 			break;
-		i++;
+		env = env->next;
 	}
-	path = ft_strdup(ft_strchr(env[i], '=') + 1);
-	array = ft_strsplit(path, ':');
+	array = ft_strsplit(env->content, ':');
 	i = 0;
 	while (array[i])
 	{
@@ -55,7 +42,7 @@ char	*get_path(char *env[], char *command)
 		path = NULL;
 		i++;
 	}
-	free_array(array);
+	del_array(array);
 	if (ret != 0)
 	{
 		ft_putendstr_fd("minishell: command not found: ", command, 2);
@@ -64,16 +51,17 @@ char	*get_path(char *env[], char *command)
 	return (path);
 }
 
-void	exec_command(char *array[], char *env[])
+void	exec_command(char *array[], t_lst *env_lst)
 {
 	char	*path;
 	int		signal;
 	pid_t	father;
 	int		erreur;
+	char	**env;
 
 	erreur = 0;
 	path = NULL;
-	if (ft_strchr(array[0], '/') || env[0] == NULL)
+	if (ft_strchr(array[0], '/') || env_lst == NULL)
 	{
 		if (access(array[0], F_OK) == 0)
 			path = ft_strdup(array[0]);
@@ -86,15 +74,17 @@ void	exec_command(char *array[], char *env[])
 		}
 	}
 	if (path == NULL)
-		path = get_path(env, array[0]);
+		path = get_path(env_lst, array[0]);
 	if (path != NULL)
 	{
+		env = list_to_tab(env_lst);
 		father = fork();
 		if (father > 0)
 		{
 			wait(&signal);
 			if (WIFSIGNALED(signal))
 				print_signal(signal);
+			del_array(env);
 			free(path);
 			return ;
 		}
