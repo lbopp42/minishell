@@ -6,7 +6,7 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 10:30:28 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/06 10:39:10 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/06 14:57:43 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	*get_path(t_lst *env, char *command)
 	int		i;
 
 	origin = env;
+	path = NULL;
+	ret = -1;
 	if (env == NULL)
 		return(command);
 	while (env != NULL)
@@ -29,20 +31,23 @@ char	*get_path(t_lst *env, char *command)
 			break;
 		env = env->next;
 	}
-	array = ft_strsplit(env->content, ':');
-	i = 0;
-	while (array[i])
+	if (env)
 	{
-		path = ft_strdup(array[i]);
-		path = ft_stradd(path, "/");
-		path = ft_stradd(path, command);
-		if ((ret = access(path, F_OK)) == 0)
-			break;
-		free(path);
-		path = NULL;
-		i++;
+		array = ft_strsplit(env->content, ':');
+		i = 0;
+		while (array[i])
+		{
+			path = ft_strdup(array[i]);
+			path = ft_stradd(path, "/");
+			path = ft_stradd(path, command);
+			if ((ret = access(path, F_OK)) == 0)
+				break;
+			free(path);
+			path = NULL;
+			i++;
+		}
+		del_array(array);
 	}
-	del_array(array);
 	if (ret != 0)
 	{
 		ft_putendstr_fd("minishell: command not found: ", command, 2);

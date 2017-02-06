@@ -6,7 +6,7 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 09:09:11 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/05 17:01:58 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/06 14:10:00 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ void	minishell(t_lst *env_lst)
 		{
 			command = ft_whitespaces(array[i]);
 			command = parssing_var(command, env_lst);
-			if (command && treatment_builtins(command, env_lst) == 1) //Maybe del a if
+			if (command && treatment_builtins(command, &env_lst) == 1) //Maybe del a if
 			{
 				del_array(command);
 				i++;
 				continue ;
 			}
-			else if (command && treatment_builtins(command, env_lst) == 0)
+			else if (command && treatment_builtins(command, &env_lst) == 0)
 			{
 				//del_lst(env_lst);
 				exit(EXIT_SUCCESS);
