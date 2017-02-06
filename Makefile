@@ -6,7 +6,7 @@
 #    By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/02 11:07:10 by lbopp             #+#    #+#              #
-#    Updated: 2017/02/06 10:48:08 by lbopp            ###   ########.fr        #
+#    Updated: 2017/02/06 16:07:34 by lbopp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC_NAME = error.c\
 		   main.c\
 		   minishell.c\
 		   parssing_env.c\
+		   prompt.c\
 		   setenv.c\
 		   signal.c
 SRC_PATH = src

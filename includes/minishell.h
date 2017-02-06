@@ -6,7 +6,7 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 09:11:33 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/06 14:10:03 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/06 17:11:02 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 #include "libft.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <sys/ioctl.h>
 
 void	add_lst(t_lst **lst, char *array);
 void	change_oldpwd(t_lst **env, char *buf);
@@ -40,5 +42,6 @@ t_lst	*tab_to_list(char *array[]);
 char	**transf_var(int *let, t_lst *env, int *wd, char *tab[]);
 char	**transf_var2(char *tab[], int *wd, char *var_test, char *string);
 int		treatment_builtins(char *array[], t_lst **env);
+void	write_promptsh(void);
 
 #endif
