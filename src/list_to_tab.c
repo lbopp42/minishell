@@ -6,11 +6,7 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 13:45:55 by lbopp             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2017/02/06 10:50:09 by lbopp            ###   ########.fr       */
-=======
-/*   Updated: 2017/02/03 17:01:22 by lbopp            ###   ########.fr       */
->>>>>>> be5ef8071135ba8211cc105a8cfdd85b6be1ca1e
+/*   Updated: 2017/02/06 17:53:13 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +39,7 @@ void	fill_lst(t_lst *lst, char ***array)
 		i++;
 		lst = lst->next;
 	}
-<<<<<<< HEAD
 	lst = origin;
-	return (array);
-=======
->>>>>>> be5ef8071135ba8211cc105a8cfdd85b6be1ca1e
 }
 
 void	create_line(t_lst *lst, char ***array)
@@ -89,22 +81,16 @@ char	**list_to_tab(t_lst *lst)
 {
 	char	**array;
 	int		size;
+	t_lst	*origin;
 
+	origin = lst;
 	array = NULL;
-<<<<<<< HEAD
-	size = lst_size(lst) + 2;
-	if (!(array = (char**)ft_memalloc(sizeof(char*) * size)))
-		return (NULL);
-	create_line(lst, &array);
-	array = fill_lst(lst, array);
-=======
 	size = lst_size(lst);
 	if (!(array = (char**)ft_memalloc(sizeof(char*) * (size + 1))))
 		return (NULL);
 	create_line(lst, &array);
 	lst = origin;
 	fill_lst(lst, &array);
->>>>>>> be5ef8071135ba8211cc105a8cfdd85b6be1ca1e
 	return (array);
 }
 
