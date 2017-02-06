@@ -6,7 +6,7 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 13:45:55 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/05 17:15:20 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/06 10:50:09 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	create_line(t_lst *lst, char ***array)
 	while (lst != NULL)
 	{
 		size = ft_strlen(lst->name) + ft_strlen(lst->content) + 1;
-		printf("size = %d\n", size);
 		if (!((*array)[i] = (char*)ft_memalloc(size + 1)))
 			return ;
 		i++;
@@ -86,7 +85,6 @@ char	**list_to_tab(t_lst *lst)
 
 	array = NULL;
 	size = lst_size(lst) + 2;
-	printf("size de la liste = %d\n", size);
 	if (!(array = (char**)ft_memalloc(sizeof(char*) * size)))
 		return (NULL);
 	create_line(lst, &array);

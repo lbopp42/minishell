@@ -6,7 +6,7 @@
 #    By: lbopp <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 15:29:49 by lbopp             #+#    #+#              #
-#    Updated: 2017/02/03 10:08:45 by lbopp            ###   ########.fr        #
+#    Updated: 2017/02/06 10:49:08 by lbopp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,7 +92,7 @@ SRC = ft_memset.c\
 	  ft_strsplitquote.c
 
 OBJ = $(SRC:.c=.o)
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 CC = gcc
 
 all: $(NAME)

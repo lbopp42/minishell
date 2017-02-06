@@ -6,7 +6,7 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 10:30:28 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/05 15:57:21 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/06 10:39:10 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ void	exec_command(char *array[], t_lst *env_lst)
 			return ;
 		}
 	}
-	if (path == NULL)
+	if (!path)
 		path = get_path(env_lst, array[0]);
-	if (path != NULL)
+	if (path)
 	{
 		env = list_to_tab(env_lst);
 		father = fork();
