@@ -6,7 +6,7 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 15:59:44 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/07 10:48:54 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/07 10:58:39 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*print_prompt(void)
 	tab[7] = "Yes my Lord ! > ";
 	tab[8] = "RM -Rf all please ! > ";
 	tab[9] = "Segmentation fault   (TROLL) > ";
-	if (!recur++)
+	if (recur++ == 0)
 		return ("Happy to see you again > ");
 	i = 0;
 	random = rand() % 10;

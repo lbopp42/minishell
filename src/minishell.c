@@ -6,7 +6,7 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 09:09:11 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/06 16:07:02 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/07 12:31:21 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	minishell(t_lst *env_lst)
 			}
 			else if (command && treatment_builtins(command, &env_lst) == 0)
 			{
-				//del_lst(env_lst);
+				del_lst(env_lst);
 				exit(EXIT_SUCCESS);
 			}
 			else

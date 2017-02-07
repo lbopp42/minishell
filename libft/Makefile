@@ -6,7 +6,7 @@
 #    By: lbopp <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 15:29:49 by lbopp             #+#    #+#              #
-#    Updated: 2017/02/06 10:49:08 by lbopp            ###   ########.fr        #
+#    Updated: 2017/02/07 11:12:24 by lbopp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,9 @@ SRC = ft_memset.c\
 	  get_next_line.c\
 	  ft_isenv.c\
 	  ft_countwordchar.c\
-	  ft_strsplitquote.c
+	  ft_strsplitquote.c\
+	  ft_whitespacesquote.c\
+	  ft_countwordspace.c
 
 OBJ = $(SRC:.c=.o)
 CFLAGS = -Wall -Werror -Wextra -g

@@ -6,7 +6,7 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 10:58:35 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/05 15:45:50 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/07 12:27:48 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,7 @@ char			**ft_whitespaces(char const *s);
 int				ft_isenv(t_lst *env, char *var);
 int				ft_countwordchar(char *s, char c);
 char			**ft_strsplitquote(char *s, char c);
+int				ft_countwordspace(char *s);
+char			**ft_whitespacesquote(char const *s);
 
 #endif

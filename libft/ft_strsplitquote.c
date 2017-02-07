@@ -6,12 +6,11 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 09:45:43 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/06 10:50:04 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/07 11:01:57 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 int		valid_quote(char *s, int i, char par)
 {
