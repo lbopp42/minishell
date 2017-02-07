@@ -6,26 +6,36 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 15:59:44 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/06 17:30:01 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/07 10:48:54 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*print_prompt()
+char	*print_prompt(void)
 {
-	char	*tab[] = {"Give me a command master > ", "What can I do for you > ",
-	"I love eating commands > ", "Give me food > ", "Hit my keyboard ! > ",
-	"I love you ! > ", "An other command pleeeaaase > ", "Yes my Lord ! > ",
-	"RM -Rf all please ! > ", "Segmentation fault   (TROLL) > "};
-	int		random;
-	int		i;
+	char		*tab[10];
+	int			random;
+	int			i;
+	static int	recur = 0;
 
+	tab[0] = "Give me a command master > ";
+	tab[1] = "What can I do for you > ";
+	tab[2] = "I love eating commands > ";
+	tab[3] = "Give me food > ";
+	tab[4] = "Hit my keyboard ! > ";
+	tab[5] = "I love you ! > ";
+	tab[6] = "An other command pleeeaaase > ";
+	tab[7] = "Yes my Lord ! > ";
+	tab[8] = "RM -Rf all please ! > ";
+	tab[9] = "Segmentation fault   (TROLL) > ";
+	if (!recur++)
+		return ("Happy to see you again > ");
 	i = 0;
 	random = rand() % 10;
 	while (i < random)
 		i++;
-	return(tab[i]);
+	return (tab[i]);
 }
 
 void	write_promptsh(void)
