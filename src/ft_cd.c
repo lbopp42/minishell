@@ -6,7 +6,7 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 08:53:00 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/06 17:49:43 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/07 12:48:19 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,7 @@ void	change_oldpwd(t_lst **env, char *buf)
 		(*env)->next = NULL;
 	}
 	else if (ft_strcmp((*env)->name, "OLDPWD"))
-	{
-		if (!((*env)->next = (t_lst*)malloc(sizeof(t_lst))))
-			return ;
-		(*env)->next->name = ft_strdup("OLDPWD");
-		(*env)->next->content = ft_strdup(buf);
-		(*env)->next->next = NULL;
-	}
+		ft_setenv(*env, "OLDPWD", buf);
 	else if (!ft_strcmp((*env)->name, "OLDPWD") && !(*env)->next)
 	{
 		if ((*env)->content)
@@ -83,13 +77,7 @@ void	change_pwd(t_lst **env)
 		(*env)->next = NULL;
 	}
 	else if (ft_strcmp((*env)->name, "PWD"))
-	{
-		if (!((*env)->next = (t_lst*)malloc(sizeof(t_lst))))
-			return ;
-		(*env)->next->name = ft_strdup("PWD");
-		(*env)->next->content = ft_strdup(buf);
-		(*env)->next->next = NULL;
-	}
+		ft_setenv(*env, "PWD", buf);
 	else if (!ft_strcmp((*env)->name, "PWD") && !(*env)->next)
 	{
 		if ((*env)->content)
@@ -113,6 +101,8 @@ void	ft_cd(char **array, t_lst **env_lst)
 		{
 			if (get_env_var("$OLDPWD", *env_lst))
 				ret = chdir(get_env_var("$OLDPWD", *env_lst));
+			else
+				ft_putendl_fd("minishell: cd: OLDPWD not set", 2);
 		}
 		else
 			ret = chdir(array[1]);

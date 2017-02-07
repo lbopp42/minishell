@@ -6,7 +6,7 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 09:11:33 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/06 17:42:14 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/07 13:58:45 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/ioctl.h>
+#include <pwd.h>
 
 void	add_lst(t_lst **lst, char *array);
 void	change_oldpwd(t_lst **env, char *buf);
@@ -34,12 +35,12 @@ void	ft_unsetenv(t_lst *env, char *name);
 char	*get_env_var(char *origin, t_lst *env);
 char	*get_path(t_lst *env, char *command);
 char	**list_to_tab(t_lst *lst);
-void	minishell(t_lst *env_lst);
-char	**parssing_var(char *tab[], t_lst *env_lst);
+void	minishell(t_lst **env_lst);
+char	**parssing_var(char *tab[], t_lst **env_lst);
 void	print_signal(int signum);
 void	ft_setenv(t_lst *env, char *var, char *valeur);
 t_lst	*tab_to_list(char *array[]);
-char	**transf_var(int *let, t_lst *env, int *wd, char *tab[]);
+char	**transf_var(int *let, t_lst **env, int *wd, char *tab[]);
 char	**transf_var2(char *tab[], int *wd, char *var_test, char *string);
 int		treatment_builtins(char *array[], t_lst **env);
 void	write_promptsh(void);

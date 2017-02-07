@@ -6,7 +6,7 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 09:09:11 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/07 12:31:21 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/07 15:21:40 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	signal_handle(int signal)
 	return ;
 }
 
-void	minishell(t_lst *env_lst)
+void	minishell(t_lst **env_lst)
 {
 	char	*line;
 	char	**command;
@@ -44,19 +44,21 @@ void	minishell(t_lst *env_lst)
 		{
 			command = ft_whitespaces(array[i]);
 			command = parssing_var(command, env_lst);
-			if (command && treatment_builtins(command, &env_lst) == 1) //Maybe del a if
+			if (command && treatment_builtins(command, env_lst) == 1) //Maybe del a if
 			{
 				del_array(command);
 				i++;
 				continue ;
 			}
-			else if (command && treatment_builtins(command, &env_lst) == 0)
+			else if (command && treatment_builtins(command, env_lst) == 0)
 			{
-				del_lst(env_lst);
+				del_array(command);
+				del_array(array);
+				del_lst(*env_lst);
 				exit(EXIT_SUCCESS);
 			}
 			else
-				exec_command(command, env_lst);
+				exec_command(command, *env_lst);
 			del_array(command);
 			i++;
 		}

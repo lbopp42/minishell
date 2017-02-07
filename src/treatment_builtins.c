@@ -6,7 +6,7 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 09:38:40 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/06 17:32:15 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/07 13:27:49 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	treatment_builtins(char *array[], t_lst **env_lst)
 	else if (!ft_strcmp(array[0], "echo"))
 		ft_echo(array);
 	else if (!ft_strcmp(array[0], "exit"))
-		ft_exit();
+		return 0;
 	else if (!ft_strcmp(array[0], "setenv"))
 	{
 		if ((array[1] == NULL || array[2] == NULL) && !error_arg_env())

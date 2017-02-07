@@ -6,7 +6,7 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 15:59:44 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/07 10:58:39 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/07 15:21:37 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*print_prompt(void)
 	return (tab[i]);
 }
 
-void	write_promptsh(void)
+void	write_promptsh()
 {
 	char			buf[256];
 	char			*tmp;
@@ -53,10 +53,8 @@ void	write_promptsh(void)
 		write(1, "-", 1);
 		i++;
 	}
-	ft_bzero(buf, 256);
 	ft_putstr("\033[36m");
-	getlogin_r(buf, 256);
-	ft_putendch(buf, '@');
+	ft_putendch(getpwuid(getuid())->pw_name, '@');
 	ft_putstr("\033[0;32m");
 	ft_bzero(buf, 256);
 	gethostname(buf, 256);
