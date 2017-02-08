@@ -6,7 +6,7 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 09:09:11 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/08 10:07:34 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/08 16:44:54 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	signal_handle(int signal)
 {
 	(void)signal;
+	if (signal == SIGINT)
+		write_promptsh();
 	return ;
 }
 
@@ -30,8 +32,8 @@ void	minishell(t_lst **env_lst)
 	while (42)
 	{
 		signal(SIGINT, signal_handle);
+		signal(SIGQUIT, signal_handle);
 		write_promptsh();
-		get_next_line(0, &line);
 		if (!line[0])
 		{
 			free(line);
