@@ -6,7 +6,7 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 08:53:00 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/07 12:48:19 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/08 09:59:49 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,15 @@ void	ft_cd(char **array, t_lst **env_lst)
 			ret = chdir(array[1]);
 	}
 	else
+	{
 		if (get_env_var("$HOME", *env_lst))
 			ret = chdir(get_env_var("$HOME", *env_lst));
+		else
+		{
+			ft_putendl_fd("minishell: cd: HOME not set", 2);
+			return ;
+		}
+	}
 	if (ret == -1)
 	{
 		ft_putstr_fd("cd: no such file or directory: ", 2);

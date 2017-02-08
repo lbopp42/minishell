@@ -6,7 +6,7 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 12:39:49 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/07 13:29:32 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/08 10:07:36 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ t_lst	*tab_to_list(char *array[])
 
 void	del_lst(t_lst *lst)
 {
+	if (!lst)
+		return ;
 	if (lst->next != NULL)
 		del_lst(lst->next);
 	free(lst->content);
