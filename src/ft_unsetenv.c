@@ -6,7 +6,7 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 16:31:45 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/05 15:43:43 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/08 09:40:37 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,32 @@
 
 #include <stdio.h>
 
-void	ft_unsetenv(t_lst *env, char *name)
+void	ft_unsetenv(t_lst *env, char *var)
 {
 	t_lst	*tmp;
 	t_lst	*origin;
 
 	origin = env;
-	tmp = NULL;
-	tmp = env;
-	while (env != NULL)
+	if (!var || !ft_isenv(env, var))
 	{
-		if (!ft_strcmp(env->name, name))
+		if (!var)
+			ft_putendl_fd("unsetenv: Too few arguments.", 2);
+		return ;
+	}
+	tmp = NULL;
+	tmp = origin;
+	while (origin != NULL)
+	{
+		if (!ft_strcmp(origin->name, var))
 		{
-			free(env->name);
-			free(env->content);
+			free(origin->name);
+			free(origin->content);
 			if (tmp != NULL)
-				tmp->next = env->next;
-			free(env);
+				tmp->next = origin->next;
+			free(origin);
 			return ;
 		}
-		tmp = env;
-		env = env->next;
+		tmp = origin;
+		origin = origin->next;
 	}
-	env = origin;
 }
