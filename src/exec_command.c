@@ -6,23 +6,53 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 10:30:28 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/06 14:57:43 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/08 12:34:20 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*get_path(t_lst *env, char *command)
+static char	*verif_access(t_lst *env, char *command)
 {
-	char	*path;
-	char	**array;
-	int		ret;
+	char			**array;
+	static int		i;
+	char			*path;
+	int				ret;
+
+	array = ft_strsplit(env->content, ':');
+	i = 0;
+	path = NULL;
+	ret = 1;
+	while (array[i])
+	{
+		path = ft_strdup(array[i]);
+		if (path[ft_strlen(path) - 1] != '/')
+			path = ft_stradd(path, "/");
+		path = ft_stradd(path, command);
+		if (access(path, F_OK) == 0)
+			if ((ret = access(path, X_OK)) == 0)
+				break;
+		free(path);
+		path = NULL;
+		i++;
+	}
+	del_array(array);
+	if (!path)
+	{
+		if (ret == -1)
+			ft_putendstr_fd("minishell: permission denied: ", command, 2);
+		else
+			ft_putendstr_fd("minishell: command not found: ", command, 2);
+		write(2, "\n", 1);
+	}
+	return (path);
+}
+
+char		*get_path(t_lst *env, char *command)
+{
 	t_lst	*origin;
-	int		i;
 
 	origin = env;
-	path = NULL;
-	ret = -1;
 	if (env == NULL)
 		return(command);
 	while (env != NULL)
@@ -32,31 +62,11 @@ char	*get_path(t_lst *env, char *command)
 		env = env->next;
 	}
 	if (env)
-	{
-		array = ft_strsplit(env->content, ':');
-		i = 0;
-		while (array[i])
-		{
-			path = ft_strdup(array[i]);
-			path = ft_stradd(path, "/");
-			path = ft_stradd(path, command);
-			if ((ret = access(path, F_OK)) == 0)
-				break;
-			free(path);
-			path = NULL;
-			i++;
-		}
-		del_array(array);
-	}
-	if (ret != 0)
-	{
-		ft_putendstr_fd("minishell: command not found: ", command, 2);
-		write(2, "\n", 1);
-	}
-	return (path);
+		return (verif_access(env, command));
+	return (NULL);
 }
 
-void	exec_command(char *array[], t_lst *env_lst)
+void		exec_command(char *array[], t_lst *env_lst)
 {
 	char	*path;
 	int		signal;
