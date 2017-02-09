@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <stdio.h>
 
 char	*get_env_var(char *origin, t_lst *env_lst)
 {
@@ -20,68 +19,62 @@ char	*get_env_var(char *origin, t_lst *env_lst)
 	tmp = env_lst;
 	while (tmp != NULL)
 	{
-		if (!ft_strcmp(tmp->name, origin + 1))
+		if (!ft_strcmp(tmp->name, origin))
 			return (tmp->content);
 		tmp = tmp->next;
 	}
 	return (NULL);
 }
 
-char	**transf_var2(char *tab[], int *wd, char *var_test, char *string)
+void	parssing_dollar(char **line, int i, t_lst *env_lst)
 {
-	free(tab[*wd]);
-	free(var_test);
-	string[ft_strlen(string)] = '\0';
-	tab[*wd] = ft_strdup(string);
-	free(string);
-	return (tab);
-}
-
-char	**transf_var(int *let, t_lst **env_lst, int *wd, char *tab[])
-{
-	int		tmp;
-	char	*string;
 	char	*var_test;
-	size_t	size;
+	char	*newline;
+	int		tmp;
 
-	*let += 1;
-	tmp = 0;
-	size = 0;
-	while (tab[*wd][*let + tmp] && (ft_isalnum(tab[*wd][*let + tmp])
-			|| tab[*wd][*let + tmp] == '_'))
-	{
-		size++;
+	tmp = i + 1;
+	var_test = NULL;
+	while (ft_isalnum((*line)[tmp]) || (*line)[tmp] == '_')
 		tmp++;
-	}
-	if (!(var_test = (char*)malloc(sizeof(char) * (size + 2))))
-		return (NULL);
-	var_test = ft_strncpy(var_test, &(tab[*wd][*let - 1]), size + 1);
-	var_test[size + 1] = '\0';
-	tab[*wd][*let - 1] = '\0';
-	string = ft_strdup(&tab[*wd][0]);
-	if (ft_isenv(*env_lst, var_test + 1) && get_env_var(var_test, *env_lst))
-		string = ft_stradd(string, get_env_var(var_test, *env_lst));
-	string = ft_stradd(string, &tab[*wd][*let + tmp]);
-	*let -= 2;
-	return (transf_var2(tab, wd, var_test, string));
+	if (!(var_test = ft_strsub((*line), i + 1, tmp - i - 1)))
+		return ;
+	(*line)[i] = '\0';
+	newline = ft_strdup(&((*line)[0]));
+	if (ft_isenv(env_lst, var_test))
+		newline = ft_stradd(newline, get_env_var(var_test, env_lst));
+	newline = ft_stradd(newline, &((*line)[tmp]));
+	free(*line);
+	free(var_test);
+	(*line) = newline;
 }
 
-char	**parssing_var(char *tab[], t_lst **env_lst)
+void	pars_ptexcl(char **line, int i, char *last_line)
 {
-	int		wd;
-	int		let;
+	char	*newline;
 
-	wd = 1;
-	while (tab[wd])
+	(*line)[i] = '\0';
+	newline = ft_strdup(&((*line)[0]));
+	if (last_line)
+		newline = ft_stradd(newline, last_line);
+	else
+		newline = ft_stradd(newline, "exit");
+	newline = ft_stradd(newline, &((*line)[i + 2]));
+	free(*line);
+	(*line) = newline;
+}
+
+void	parssing_line(char **line, t_lst *env_lst, char *last_line)
+{
+	int i;
+
+	i = 0;
+	(void)last_line;
+	while ((*line)[i])
 	{
-		let = 0;
-		while (tab[wd][let])
-		{
-			if (tab[wd][let] == '$')
-				tab = transf_var(&let, env_lst, &wd, tab);
-			let++;
-		}
-		tab[wd] ? wd++ : 0;
+		if ((*line)[i] == '$' && (*line)[i + 1] && ft_isalnum((*line)[i + 1]))
+			parssing_dollar(line, i, env_lst);
+		else if ((*line)[i] == '!' && (*line)[i + 1] && (*line)[i + 1] == '!')
+			pars_ptexcl(line, i, last_line);
+		i++;
 	}
-	return (tab);
 }

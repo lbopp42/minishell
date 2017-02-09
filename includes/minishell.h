@@ -36,7 +36,7 @@ char	*get_env_var(char *origin, t_lst *env);
 char	*get_path(t_lst *env, char *command);
 char	**list_to_tab(t_lst *lst);
 void	minishell(t_lst **env_lst);
-char	**parssing_var(char *tab[], t_lst **env_lst);
+void	parssing_line(char **line, t_lst *env_lst, char *last_line);
 void	print_signal(int signum);
 void	ft_setenv(t_lst *env, char *var, char *valeur);
 t_lst	*tab_to_list(char *array[]);

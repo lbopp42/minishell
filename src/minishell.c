@@ -26,9 +26,11 @@ void	minishell(t_lst **env_lst)
 	char	**command;
 	char	**array;
 	int		i;
+	char	*last_line;
 
 	line = NULL;
 	array = NULL;
+	last_line = NULL;
 	while (42)
 	{
 		signal(SIGINT, signal_handle);
@@ -40,13 +42,17 @@ void	minishell(t_lst **env_lst)
 			free(line);
 			continue ;
 		}
+		if (!ft_strcmp(line, "exit"))
+			exit(EXIT_SUCCESS);
+		parssing_line(&line, *env_lst, last_line);
 		array = ft_strsplitquote(line, ';');
-		free(line);
 		i = 0;
 		while (array[i])
 		{
 			command = ft_whitespaces(array[i]);
-			command = parssing_var(command, env_lst);
+			if (last_line)
+				free(last_line);
+			last_line = ft_strdup(line);
 			if (command && treatment_builtins(command, env_lst) == 1) //Maybe del a if
 			{
 				del_array(command);
@@ -55,6 +61,8 @@ void	minishell(t_lst **env_lst)
 			}
 			else if (command && treatment_builtins(command, env_lst) == 0)
 			{
+				free(last_line);
+				free(line);
 				del_array(command);
 				del_array(array);
 				del_lst(*env_lst);
@@ -65,6 +73,7 @@ void	minishell(t_lst **env_lst)
 			del_array(command);
 			i++;
 		}
+		free(line);
 		del_array(array);
 	}
 }

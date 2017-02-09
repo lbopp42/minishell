@@ -99,8 +99,8 @@ void	ft_cd(char **array, t_lst **env_lst)
 	{
 		if (!ft_strcmp(array[1], "-"))
 		{
-			if (get_env_var("$OLDPWD", *env_lst))
-				ret = chdir(get_env_var("$OLDPWD", *env_lst));
+			if (get_env_var("OLDPWD", *env_lst))
+				ret = chdir(get_env_var("OLDPWD", *env_lst));
 			else
 				ft_putendl_fd("minishell: cd: OLDPWD not set", 2);
 		}
@@ -109,8 +109,8 @@ void	ft_cd(char **array, t_lst **env_lst)
 	}
 	else
 	{
-		if (get_env_var("$HOME", *env_lst))
-			ret = chdir(get_env_var("$HOME", *env_lst));
+		if (get_env_var("HOME", *env_lst))
+			ret = chdir(get_env_var("HOME", *env_lst));
 		else
 		{
 			ft_putendl_fd("minishell: cd: HOME not set", 2);
@@ -125,8 +125,8 @@ void	ft_cd(char **array, t_lst **env_lst)
 	else
 	{
 		if (array[1] && !ft_strcmp(array[1], "-") &&
-			get_env_var("$OLDPWD", *env_lst))
-			ft_putendl(get_env_var("$OLDPWD", *env_lst));
+			get_env_var("OLDPWD", *env_lst))
+			ft_putendl(get_env_var("OLDPWD", *env_lst));
 		change_pwd(env_lst);
 		change_oldpwd(env_lst, buf);
 	}

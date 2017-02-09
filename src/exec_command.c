@@ -63,6 +63,11 @@ char		*get_path(t_lst *env, char *command)
 	}
 	if (env)
 		return (verif_access(env, command));
+	else
+	{
+		ft_putendstr_fd("minishell: No such file or directory: ", command, 2);
+		write(2, "\n", 1);
+	}
 	return (NULL);
 }
 
