@@ -13,11 +13,11 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include "libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/ioctl.h>
-#include <pwd.h>
+# include "libft.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/ioctl.h>
+# include <pwd.h>
 
 void	add_lst(t_lst **lst, char *array);
 void	change_oldpwd(t_lst **env, char *buf);

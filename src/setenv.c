@@ -17,31 +17,25 @@ void	ft_setenv(t_lst *env, char *var, char *valeur)
 	t_lst	*tmp;
 
 	tmp = env;
-	while (env->next != NULL)
+	while (tmp->next != NULL)
 	{
-		if (!ft_strcmp(env->name, var))
+		if (!ft_strcmp(tmp->name, var))
 		{
-			free(env->content);
-			env->content = ft_strdup(valeur);
-			env = tmp;
+			free(tmp->content);
+			tmp->content = ft_strdup(valeur);
 			return ;
 		}
-		env = env->next;
+		tmp = tmp->next;
 	}
-	if (!ft_strcmp(env->name, var))
+	if (!ft_strcmp(tmp->name, var))
 	{
-		free(env->content);
-		env->content = ft_strdup(valeur);
-		env = tmp;
+		free(tmp->content);
+		tmp->content = ft_strdup(valeur);
 		return ;
 	}
-	if (!(env->next = (t_lst*)malloc(sizeof(t_lst))))
-	{
-		env = tmp;
+	if (!(tmp->next = (t_lst*)malloc(sizeof(t_lst))))
 		return ;
-	}
-	env->next->name = ft_strdup(var);
-	env->next->content = ft_strdup(valeur);
-	env->next->next = NULL;
-	env = tmp;
+	tmp->next->name = ft_strdup(var);
+	tmp->next->content = ft_strdup(valeur);
+	tmp->next->next = NULL;
 }

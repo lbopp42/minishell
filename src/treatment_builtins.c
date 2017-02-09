@@ -19,7 +19,7 @@ int	treatment_builtins(char *array[], t_lst **env_lst)
 	else if (!ft_strcmp(array[0], "echo"))
 		ft_echo(array);
 	else if (!ft_strcmp(array[0], "exit"))
-		return 0;
+		return (0);
 	else if (!ft_strcmp(array[0], "setenv"))
 	{
 		if ((array[1] == NULL || array[2] == NULL) && !error_arg_env())

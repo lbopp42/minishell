@@ -26,7 +26,6 @@ void	ft_unsetenv(t_lst *env, char *var)
 			ft_putendl_fd("unsetenv: Too few arguments.", 2);
 		return ;
 	}
-	tmp = NULL;
 	tmp = origin;
 	while (origin != NULL)
 	{

@@ -55,8 +55,7 @@ void			ft_fill(char const *s, char ***array)
 		letter = 0;
 		if (s[i] == 34 || s[i] == 39)
 		{
-			quote = s[i];
-			i++;
+			quote = s[i++];
 			while (s[i] && s[i] != quote)
 				(*array)[word][letter++] = s[i++];
 			if (s[i] == quote)
@@ -65,11 +64,10 @@ void			ft_fill(char const *s, char ***array)
 		else
 			while (!ft_isspace(s[i]) && s[i])
 				(*array)[word][letter++] = s[i++];
-		(*array)[word++][letter] = '\0';
+		word++;
 		while (ft_isspace(s[i]) && s[i])
 			i++;
 	}
-	(*array)[word] = 0;
 }
 
 void			ft_letter(char const *s, char ***array, int i, int word)
@@ -82,8 +80,7 @@ void			ft_letter(char const *s, char ***array, int i, int word)
 		letter = 0;
 		if (s[i] == 34 || s[i] == 39)
 		{
-			quote = s[i];
-			i++;
+			quote = s[i++];
 			while (s[i++] != quote && s[i])
 				letter++;
 			(s[i] == quote) ? i++ : 0;
@@ -96,7 +93,8 @@ void			ft_letter(char const *s, char ***array, int i, int word)
 			}
 		while (ft_isspace(s[i]) && s[i])
 			i++;
-		if (!((*array)[word++] = (char*)malloc(sizeof(char) * (letter + 1))))
+		if (!((*array)[word++] =
+			(char*)ft_memalloc(sizeof(char) * (letter + 1))))
 			return ;
 	}
 }
@@ -112,7 +110,7 @@ char			**ft_whitespacesquote(char const *s)
 	if (!(string = ft_strtrim(s)))
 		return (0);
 	word = ft_word(string, 0, 0);
-	if (!(array = (char**)malloc(sizeof(char*) * (word + 1))))
+	if (!(array = (char**)ft_memalloc(sizeof(char*) * (word + 1))))
 		return (0);
 	ft_letter(string, &array, 0, 0);
 	ft_fill(string, &array);

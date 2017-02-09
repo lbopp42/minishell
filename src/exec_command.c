@@ -21,20 +21,16 @@ static char	*verif_access(t_lst *env, char *command)
 
 	array = ft_strsplit(env->content, ':');
 	i = 0;
-	path = NULL;
 	ret = 1;
 	while (array[i])
 	{
-		path = ft_strdup(array[i]);
-		if (path[ft_strlen(path) - 1] != '/')
-			path = ft_stradd(path, "/");
-		path = ft_stradd(path, command);
+		path = ft_strdup(array[i++]);
+		path = ft_addslash(path, command);
 		if (access(path, F_OK) == 0)
 			if ((ret = access(path, X_OK)) == 0)
 				break;
 		free(path);
 		path = NULL;
-		i++;
 	}
 	del_array(array);
 	if (!path)

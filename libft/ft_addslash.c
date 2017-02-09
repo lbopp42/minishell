@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_echo.c                                          :+:      :+:    :+:   */
+/*   ft_addslash.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/23 13:21:02 by lbopp             #+#    #+#             */
-/*   Updated: 2017/01/27 10:49:03 by lbopp            ###   ########.fr       */
+/*   Created: 2017/02/09 16:12:55 by lbopp             #+#    #+#             */
+/*   Updated: 2017/02/09 16:12:58 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_echo(char **array)
+char	*ft_addslash(char *s1, char *s2)
 {
-	int	i;
-
-	i = 1;
-	while (array[i])
-		ft_putendsp(array[i++]);
-	write(1, "\n", 1);
+	if (!s1 || !s2)
+		return (NULL);
+	if (s1[ft_strlen(s1) - 1] && s1[ft_strlen(s1) - 1] != '/')
+		s1 = ft_stradd(s1, "/");
+	s1 = ft_stradd(s1, s2);
+	return (s1);
 }

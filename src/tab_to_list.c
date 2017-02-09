@@ -15,7 +15,7 @@
 void	create_lst(t_lst **lst, char *array)
 {
 	if (!(*lst = (t_lst*)malloc(sizeof(t_lst))))
-		return;
+		return ;
 	(*lst)->name = ft_strcdup(array, '=');
 	(*lst)->content = ft_strdup(ft_strchr(array, '=') + 1);
 	(*lst)->next = NULL;
@@ -43,8 +43,6 @@ t_lst	*tab_to_list(char *array[])
 	}
 	return (lst);
 }
-
-#include <stdio.h>
 
 void	del_lst(t_lst *lst)
 {

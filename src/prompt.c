@@ -38,7 +38,7 @@ char	*print_prompt(void)
 	return (tab[i]);
 }
 
-void	write_promptsh()
+void	write_promptsh(void)
 {
 	char			buf[256];
 	char			*tmp;
@@ -53,9 +53,8 @@ void	write_promptsh()
 		write(1, "-", 1);
 		i++;
 	}
-	ft_putstr("\033[36m");
-	ft_putendch(getpwuid(getuid())->pw_name, '@');
-	ft_putstr("\033[0;32m");
+	ft_putendstr("\033[36m", getpwuid(getuid())->pw_name);
+	ft_putstr("@\033[0;32m");
 	ft_bzero(buf, 256);
 	gethostname(buf, 256);
 	tmp = ft_strcdup(buf, '.');
@@ -63,9 +62,7 @@ void	write_promptsh()
 	free(tmp);
 	ft_bzero(buf, 256);
 	getcwd(buf, 256);
-	ft_putstr("\033[1;33m");
-	ft_putendl(buf);
-	ft_putstr("\033[31m");
-	ft_putstr(print_prompt());
+	ft_putendstr("\033[1;33m", buf);
+	ft_putendstr("\n\033[31m", print_prompt());
 	ft_putstr("\033[0m");
 }

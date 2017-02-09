@@ -21,25 +21,24 @@ void	fill_lst(t_lst *lst, char ***array)
 
 	origin = lst;
 	i = 0;
-	while (lst != NULL)
+	while (origin)
 	{
 		j = 0;
 		k = 0;
-		while (lst->name[j])
+		while (origin->name[j])
 		{
-			(*array)[i][j] = lst->name[j];
+			(*array)[i][j] = origin->name[j];
 			j++;
 		}
 		(*array)[i][j] = '=';
-		while (lst->content[k])
+		while (origin->content[k])
 		{
-			(*array)[i][j + 1 + k] = lst->content[k];
+			(*array)[i][j + 1 + k] = origin->content[k];
 			k++;
 		}
 		i++;
-		lst = lst->next;
+		origin = origin->next;
 	}
-	lst = origin;
 }
 
 void	create_line(t_lst *lst, char ***array)

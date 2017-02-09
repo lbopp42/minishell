@@ -14,11 +14,11 @@
 
 void	print_signal(int signum)
 {
-	int		array[] = {SIGABRT, SIGALRM, SIGBUS, SIGFPE, SIGHUP,
+	const int	array[] = {SIGABRT, SIGALRM, SIGBUS, SIGFPE, SIGHUP,
 	SIGILL, SIGINT, SIGKILL, SIGPROF, SIGQUIT, SIGSEGV,
 	SIGSTOP, SIGSYS, SIGTERM, SIGTRAP, SIGTSTP, SIGTTIN, SIGTTOU, SIGUSR1,
 	SIGUSR2, SIGVTALRM, SIGXCPU, SIGXFSZ, 0};
-	char	*err_sign[] = {"Abort\n", "Alarm\n", "Bus error\n",
+	const char	*err_sign[] = {"Abort\n", "Alarm\n", "Bus error\n",
 	"Floting point exception\n", "Hangup\n", "Illegal hardware instruction\n",
 	"\n", "Killed\n", "Profile signal\n", "Quit\n", "Segmentation fault\n",
 	"Suspended (signal)\n", "Invalid system call\n", "Terminated\n",
@@ -26,7 +26,7 @@ void	print_signal(int signum)
 	"Suspended (tty output)\n", "User-defined signal 1\n",
 	"User-defined signal 1\n", "Virtual time alarm\n", "cpu limit exceeded\n",
 	"file size limit exceeded\n"};
-	int		i;
+	int			i;
 
 	i = 0;
 	while (array[i])
