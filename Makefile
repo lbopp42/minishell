@@ -29,7 +29,8 @@ SRC_NAME = error.c\
 		   parssing_env.c\
 		   prompt.c\
 		   setenv.c\
-		   signal.c
+		   signal.c\
+		   verif_access.c
 SRC_PATH = src
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(SRC:.c=.o)

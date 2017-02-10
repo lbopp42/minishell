@@ -44,6 +44,7 @@ t_lst	*tab_to_list(char *array[]);
 char	**transf_var(int *let, t_lst **env, int *wd, char *tab[]);
 char	**transf_var2(char *tab[], int *wd, char *var_test, char *string);
 int		treatment_builtins(char *array[], t_lst **env);
+char	*verif_access(t_lst *env, char *command);
 void	write_promptsh(void);
 
 #endif
