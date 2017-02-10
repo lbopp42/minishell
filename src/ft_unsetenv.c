@@ -6,13 +6,11 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 16:31:45 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/08 09:40:37 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/10 14:57:07 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-#include <stdio.h>
 
 void	ft_unsetenv(t_lst *env, char *var)
 {

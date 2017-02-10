@@ -6,7 +6,7 @@
 #    By: lbopp <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 15:29:49 by lbopp             #+#    #+#              #
-#    Updated: 2017/02/10 11:40:09 by lbopp            ###   ########.fr        #
+#    Updated: 2017/02/10 14:54:29 by lbopp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,7 +96,7 @@ SRC = ft_memset.c\
 	  ft_isinarray.c
 
 OBJ = $(SRC:.c=.o)
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra
 CC = gcc
 
 all: $(NAME)

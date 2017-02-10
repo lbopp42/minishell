@@ -75,6 +75,6 @@ void	parssing_line(char **line, t_lst *env_lst, char *last_line)
 			parssing_dollar(line, i, env_lst);
 		else if ((*line)[i] == '!' && (*line)[i + 1] && (*line)[i + 1] == '!')
 			pars_ptexcl(line, i, last_line);
-		i++;
+		(*line)[i] ? i++ : 0;
 	}
 }

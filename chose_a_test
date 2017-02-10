@@ -1,4 +1,0 @@
-- Tests les leaks.
-- Tests sans env.
-- Variable OLDPWD.
-- Variable PWD.

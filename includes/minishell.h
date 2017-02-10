@@ -6,7 +6,7 @@
 /*   By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 09:11:33 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/07 13:58:45 by lbopp            ###   ########.fr       */
+/*   Updated: 2017/02/10 14:55:56 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MINISHELL_H
 
 # include "libft.h"
-# include <stdio.h>
 # include <stdlib.h>
 # include <sys/ioctl.h>
 # include <pwd.h>

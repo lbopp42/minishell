@@ -6,12 +6,12 @@
 #    By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/02 11:07:10 by lbopp             #+#    #+#              #
-#    Updated: 2017/02/06 16:07:34 by lbopp            ###   ########.fr        #
+#    Updated: 2017/02/10 14:53:33 by lbopp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra
 LIBFT = libft/
 CC = clang
 SRC_NAME = error.c\
