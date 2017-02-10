@@ -20,60 +20,39 @@ void	signal_handle(int signal)
 	return ;
 }
 
-void	minishell(t_lst **env_lst)
+void	clean_up(char *last_line, char *line, char ***command, char **array)
 {
-	char	*line;
-	char	**command;
-	char	**array;
-	int		i;
-	char	*last_line;
+	free(last_line);
+	free(line);
+	del_array(*command);
+	*command = NULL;
+	del_array(array);
+	ft_exit();
+}
 
-	line = NULL;
+void	minishell(t_lst **env_lst, char **last_line, char *line)
+{
+	char		**command;
+	char		**array;
+	int			i;
+	const char	*tab[] =
+	{"cd", "exit", "setenv", "unsetenv", "env", "echo", NULL};
+
 	array = NULL;
-	last_line = NULL;
-	while (42)
+	array = ft_strsplitquote(line, ';');
+	i = 0;
+	while (array[i])
 	{
-		signal(SIGINT, signal_handle);
-		signal(SIGQUIT, signal_handle);
-		write_promptsh();
-		get_next_line(0, &line);
-		if (!line[0])
+		command = ft_whitespaces(array[i]);
+		if (command && treatment_builtins(command, env_lst) == 0)
 		{
-			free(line);
-			continue ;
+			del_lst(*env_lst);
+			clean_up(*last_line, line, &command, array);
 		}
-		if (!ft_strcmp(line, "exit"))
-			exit(EXIT_SUCCESS);
-		parssing_line(&line, *env_lst, last_line);
-		array = ft_strsplitquote(line, ';');
-		i = 0;
-		while (array[i])
-		{
-			command = ft_whitespaces(array[i]);
-			if (last_line)
-				free(last_line);
-			last_line = ft_strdup(line);
-			if (command && treatment_builtins(command, env_lst) == 1) //Maybe del a if
-			{
-				del_array(command);
-				i++;
-				continue ;
-			}
-			else if (command && treatment_builtins(command, env_lst) == 0)
-			{
-				free(last_line);
-				free(line);
-				del_array(command);
-				del_array(array);
-				del_lst(*env_lst);
-				exit(EXIT_SUCCESS);
-			}
-			else
-				exec_command(command, *env_lst);
-			del_array(command);
-			i++;
-		}
-		free(line);
-		del_array(array);
+		else if (command && !ft_isinarray(command[0], (char**)tab))
+			exec_command(command, *env_lst);
+		del_array(command);
+		i++;
 	}
+	del_array(array);
 }

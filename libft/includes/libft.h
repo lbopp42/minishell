@@ -110,5 +110,6 @@ char			**ft_strsplitquote(char *s, char c);
 int				ft_countwordspace(char *s);
 char			**ft_whitespacesquote(char const *s);
 char			*ft_addslash(char *s1, char *s2);
+int				ft_isinarray(char *var, char **array);
 
 #endif

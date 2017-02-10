@@ -118,10 +118,7 @@ void	ft_cd(char **array, t_lst **env_lst)
 		}
 	}
 	if (ret == -1)
-	{
-		ft_putstr_fd("cd: no such file or directory: ", 2);
-		ft_putendl_fd(array[1], 2);
-	}
+		ft_putendstr_fd("cd: no such file or directory: ", array[1], 2);
 	else
 	{
 		if (array[1] && !ft_strcmp(array[1], "-") &&
