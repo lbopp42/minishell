@@ -38,7 +38,7 @@ char	**list_to_tab(t_lst *lst);
 void	minishell(t_lst **env_lst, char **last_line, char *line);
 void	parssing_line(char **line, t_lst *env_lst, char *last_line);
 void	print_signal(int signum);
-void	ft_setenv(t_lst *env, char *var, char *valeur);
+void	ft_setenv(t_lst **env, char *var, char *valeur);
 void	signal_handle(int signal);
 t_lst	*tab_to_list(char *array[]);
 char	**transf_var(int *let, t_lst **env, int *wd, char *tab[]);

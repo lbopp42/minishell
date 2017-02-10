@@ -24,7 +24,7 @@ int	treatment_builtins(char *array[], t_lst **env_lst)
 	{
 		if ((array[1] == NULL || array[2] == NULL) && !error_arg_env())
 			return (1);
-		ft_setenv(*env_lst, array[1], array[2]);
+		ft_setenv(env_lst, array[1], array[2]);
 	}
 	else if (!ft_strcmp(array[0], "unsetenv"))
 		ft_unsetenv(*env_lst, array[1]);

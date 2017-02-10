@@ -12,12 +12,35 @@
 
 #include "minishell.h"
 
-void	ft_setenv(t_lst *env, char *var, char *valeur)
+void	fill_env(t_lst **env, char *var, char *valeur)
 {
 	t_lst	*tmp;
 
-	tmp = env;
-	while (tmp->next != NULL)
+	tmp = *env;
+	if (!tmp)
+	{
+		if (!(*env = (t_lst*)malloc(sizeof(t_lst))))
+			return ;
+		(*env)->name = ft_strdup(var);
+		(*env)->content = ft_strdup(valeur);
+		(*env)->next = NULL;
+	}
+	else
+	{
+		if (!(tmp->next = (t_lst*)malloc(sizeof(t_lst))))
+			return ;
+		tmp->next->name = ft_strdup(var);
+		tmp->next->content = ft_strdup(valeur);
+		tmp->next->next = NULL;
+	}
+}
+
+void	ft_setenv(t_lst **env, char *var, char *valeur)
+{
+	t_lst	*tmp;
+
+	tmp = *env;
+	while (tmp && tmp->next != NULL)
 	{
 		if (!ft_strcmp(tmp->name, var))
 		{
@@ -27,15 +50,11 @@ void	ft_setenv(t_lst *env, char *var, char *valeur)
 		}
 		tmp = tmp->next;
 	}
-	if (!ft_strcmp(tmp->name, var))
+	if (tmp && !ft_strcmp(tmp->name, var))
 	{
 		free(tmp->content);
 		tmp->content = ft_strdup(valeur);
 		return ;
 	}
-	if (!(tmp->next = (t_lst*)malloc(sizeof(t_lst))))
-		return ;
-	tmp->next->name = ft_strdup(var);
-	tmp->next->content = ft_strdup(valeur);
-	tmp->next->next = NULL;
+	fill_env(env, var, valeur);
 }
