@@ -17,6 +17,8 @@ int	ft_isinarray(char *var, char **array)
 	int i;
 
 	i = 0;
+	if (!var)
+		return (-1);
 	while (array[i])
 	{
 		if (!ft_strcmp(var, array[i]))

@@ -28,7 +28,7 @@ int	main(void)
 		signal(SIGQUIT, signal_handle);
 		write_promptsh();
 		get_next_line(0, &line);
-		if (line[0])
+		if (line && line[0])
 		{
 			parssing_line(&line, env_lst, last_line);
 			(last_line) ? free(last_line) : 0;

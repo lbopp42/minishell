@@ -39,9 +39,10 @@ void	minishell(t_lst **env_lst, char **last_line, char *line)
 	{"cd", "exit", "setenv", "unsetenv", "env", "echo", NULL};
 
 	array = NULL;
+	command = NULL;
 	array = ft_strsplitquote(line, ';');
 	i = 0;
-	while (array[i])
+	while (array && array[i])
 	{
 		command = ft_whitespaces(array[i]);
 		if (command && treatment_builtins(command, env_lst) == 0)
