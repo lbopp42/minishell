@@ -35,7 +35,7 @@ void	minishell(t_lst **env_lst, char **last_line, char *line)
 	char		**command;
 	char		**array;
 	int			i;
-	const char	*tab[] =
+	const char	*array_cmd[] =
 	{"cd", "exit", "setenv", "unsetenv", "env", "echo", NULL};
 
 	array = NULL;
@@ -50,7 +50,7 @@ void	minishell(t_lst **env_lst, char **last_line, char *line)
 			del_lst(*env_lst);
 			clean_up(*last_line, line, &command, array);
 		}
-		else if (command && !ft_isinarray(command[0], (char**)tab))
+		else if (command && !ft_isinarray(command[0], (char**)array_cmd))
 			exec_command(command, *env_lst);
 		del_array(command);
 		i++;

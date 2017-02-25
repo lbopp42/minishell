@@ -30,6 +30,8 @@ SRC_NAME = error.c\
 		   prompt.c\
 		   setenv.c\
 		   signal.c\
+		   singleton.c\
+		   term.c\
 		   verif_access.c
 SRC_PATH = src
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
@@ -42,7 +44,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C libft
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -I includes -I libft/includes -lft -L libft
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -I includes -I libft/includes -lft -L libft -ltermcap
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $^ -o $@ -I includes -I libft/includes

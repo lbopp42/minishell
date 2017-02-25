@@ -12,6 +12,27 @@
 
 #include "minishell.h"
 
+void	get_line(char **line)
+{
+	char	buff[4];
+	int		i;
+
+	if (!(*line = ft_strnew(1)))
+		return ;
+	while (buff[0] != 10)
+	{
+		i = 0;
+		ft_bzero(buff, 4);
+		read(0, buff, 4);
+		if (ft_isprint(buff[0]) && !buff[1])
+		{
+			ft_putchar(buff[0]);
+			*line = ft_stradd(*line, buff);
+		}
+	}
+	ft_putchar('\n');
+}
+
 int	main(void)
 {
 	t_lst		*env_lst;
@@ -20,14 +41,15 @@ int	main(void)
 	extern char	**environ;
 
 	last_line = NULL;
+	init_sigleton();
+	init_term();
 	env_lst = tab_to_list(environ);
 	while (42)
 	{
 		line = NULL;
-		signal(SIGINT, signal_handle);
-		signal(SIGQUIT, signal_handle);
+		manage_signal();
 		write_promptsh();
-		get_next_line(0, &line);
+		get_line(&line);
 		if (line && line[0])
 		{
 			parssing_line(&line, env_lst, last_line);

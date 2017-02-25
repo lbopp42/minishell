@@ -29,7 +29,7 @@ char	*get_env_var(char *origin, t_lst *env_lst)
 void	parssing_dollar(char **line, int i, t_lst *env_lst)
 {
 	char	*var_test;
-	char	*newline;
+	char	*new_line;
 	int		tmp;
 
 	tmp = i + 1;
@@ -39,28 +39,28 @@ void	parssing_dollar(char **line, int i, t_lst *env_lst)
 	if (!(var_test = ft_strsub((*line), i + 1, tmp - i - 1)))
 		return ;
 	(*line)[i] = '\0';
-	newline = ft_strdup(&((*line)[0]));
+	new_line = ft_strdup(&((*line)[0]));
 	if (ft_isenv(env_lst, var_test))
-		newline = ft_stradd(newline, get_env_var(var_test, env_lst));
-	newline = ft_stradd(newline, &((*line)[tmp]));
+		new_line = ft_stradd(new_line, get_env_var(var_test, env_lst));
+	new_line = ft_stradd(new_line, &((*line)[tmp]));
 	free(*line);
 	free(var_test);
-	(*line) = newline;
+	(*line) = new_line;
 }
 
 void	pars_ptexcl(char **line, int i, char *last_line)
 {
-	char	*newline;
+	char	*new_line;
 
 	(*line)[i] = '\0';
-	newline = ft_strdup(&((*line)[0]));
+	new_line = ft_strdup(&((*line)[0]));
 	if (last_line)
-		newline = ft_stradd(newline, last_line);
+		new_line = ft_stradd(new_line, last_line);
 	else
-		newline = ft_stradd(newline, "exit");
-	newline = ft_stradd(newline, &((*line)[i + 2]));
+		new_line = ft_stradd(new_line, "exit");
+	new_line = ft_stradd(new_line, &((*line)[i + 2]));
 	free(*line);
-	(*line) = newline;
+	(*line) = new_line;
 }
 
 void	parssing_line(char **line, t_lst *env_lst, char *last_line)

@@ -36,3 +36,9 @@ void	print_signal(int signum)
 		i++;
 	}
 }
+
+void	manage_signal(void)
+{
+	signal(SIGINT, signal_handle);
+	signal(SIGQUIT, signal_handle);
+}

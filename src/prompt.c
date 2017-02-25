@@ -14,28 +14,28 @@
 
 char	*print_prompt(void)
 {
-	char		*tab[10];
+	char		*array[10];
 	int			random;
 	int			i;
 	static int	recur = 0;
 
-	tab[0] = "Give me a command master > ";
-	tab[1] = "What can I do for you > ";
-	tab[2] = "I love eating commands > ";
-	tab[3] = "Give me food > ";
-	tab[4] = "Hit my keyboard ! > ";
-	tab[5] = "I love you ! > ";
-	tab[6] = "An other command pleeeaaase > ";
-	tab[7] = "Yes my Lord ! > ";
-	tab[8] = "RM -Rf all please ! > ";
-	tab[9] = "Segmentation fault   (TROLL) > ";
+	array[0] = "Give me a command master > ";
+	array[1] = "What can I do for you > ";
+	array[2] = "I love eating commands > ";
+	array[3] = "Give me food > ";
+	array[4] = "Hit my keyboard ! > ";
+	array[5] = "I love you ! > ";
+	array[6] = "An other command pleeeaaase > ";
+	array[7] = "Yes my Lord ! > ";
+	array[8] = "RM -Rf all please ! > ";
+	array[9] = "Segmentation fault   (TROLL) > ";
 	if (recur++ == 0)
 		return ("Happy to see you again > ");
 	i = 0;
 	random = rand() % 10;
 	while (i < random)
 		i++;
-	return (tab[i]);
+	return (array[i]);
 }
 
 void	write_promptsh(void)
