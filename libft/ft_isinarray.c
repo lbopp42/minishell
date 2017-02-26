@@ -12,6 +12,8 @@
 
 #include "libft.h"
 
+#include <stdio.h>
+
 int	ft_isinarray(char *var, char **array)
 {
 	int i;

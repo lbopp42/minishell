@@ -43,7 +43,7 @@ char	**put_exec_in_array(char *exec_name, char **exec_array)
 		exec_array[0] = ft_strdup(exec_name);
 		return (exec_array);
 	}
-	else if (ft_isinarray(exec_name, exec_array))
+	if (ft_isinarray(exec_name, exec_array))
 		return (exec_array);
 	else
 	{
@@ -51,6 +51,32 @@ char	**put_exec_in_array(char *exec_name, char **exec_array)
 		new_array[ft_arraylen(exec_array)] = ft_strdup(exec_name);
 		return (new_array);
 	}
+}
+
+/*
+** Management of builtins
+*/
+
+char	**add_builtins_in_array(char *exec_name, char **exec_array)
+{
+	const char	*buil_array[6] = {"echo", "cd", "setenv", "unsetenv", "env",
+								"exit"};
+	int			i;
+	char		**new_array;
+
+	i = 0;
+	new_array = NULL;
+	if (exec_array)
+		new_array = cpy_array_in_array(exec_array);
+	while (i < 6)
+	{
+		if (!ft_strncmp(buil_array[i], exec_name, ft_strlen(exec_name)))
+			new_array = put_exec_in_array((char*)buil_array[i], new_array);
+		/*else if (!ft_strncmp(buil_array[i], exec_name, ft_strlen(exec_name)))
+			new_array = put_exec_in_array((char*)buil_array[i], new_array);*/
+		i++;
+	}
+	return (new_array);
 }
 
 void	print_array(char **array)
@@ -113,6 +139,7 @@ int		browse_path(char *word, t_lst *env_lst, char **line)
 		}
 		closedir(dir);
 	}
+	exec_array = add_builtins_in_array(word, exec_array);
 	if (exec_array && ft_arraylen(exec_array) == 1)
 	{
 		print_cmd(word, exec_array[0], line);
