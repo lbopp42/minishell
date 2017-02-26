@@ -93,7 +93,8 @@ SRC = ft_memset.c\
 	  ft_whitespacesquote.c\
 	  ft_countwordspace.c\
 	  ft_addslash.c\
-	  ft_isinarray.c
+	  ft_isinarray.c\
+	  ft_arraylen.c
 
 OBJ = $(SRC:.c=.o)
 CFLAGS = -Wall -Werror -Wextra

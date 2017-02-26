@@ -11,12 +11,14 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	get_line(char **line)
+ 
+void	get_line(char **line, t_lst *env_lst)
 {
 	char	buff[4];
 	int		i;
+	int		sp;
 
+	sp = 0;
 	if (!(*line = ft_strnew(1)))
 		return ;
 	while (buff[0] != 10)
@@ -27,10 +29,21 @@ void	get_line(char **line)
 		if (ft_isprint(buff[0]) && !buff[1])
 		{
 			ft_putchar(buff[0]);
+			if (ft_isspace(buff[0]) && sp == 0)
+				continue ;
 			*line = ft_stradd(*line, buff);
+			sp = 1;
 		}
+		else if (buff[0] == 9 && !buff[1])
+			find_cmd(line, env_lst);
 	}
 	ft_putchar('\n');
+}
+
+int	put_my_char(int c)
+{
+	write(1, &c, 1);
+	return (1);
 }
 
 int	main(void)
@@ -49,7 +62,7 @@ int	main(void)
 		line = NULL;
 		manage_signal();
 		write_promptsh();
-		get_line(&line);
+		get_line(&line, env_lst);
 		if (line && line[0])
 		{
 			parssing_line(&line, env_lst, last_line);

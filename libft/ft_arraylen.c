@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isinarray.c                                     :+:      :+:    :+:   */
+/*   ft_arraylen.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbopp <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/10 11:38:02 by lbopp             #+#    #+#             */
-/*   Updated: 2017/02/10 11:38:07 by lbopp            ###   ########.fr       */
+/*   Created: 2017/02/26 11:55:44 by lbopp             #+#    #+#             */
+/*   Updated: 2017/02/26 11:55:47 by lbopp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isinarray(char *var, char **array)
+size_t	ft_arraylen(char **array)
 {
-	int i;
+	size_t	i;
 
 	i = 0;
-	if (!var)
-		return (-1);
-	while (array && array[i])
-	{
-		if (array && array[i] && !ft_strcmp(var, array[i]))
-			return (1);
+	while (array[i])
 		i++;
-	}
-	return (0);
+	return (i);
 }

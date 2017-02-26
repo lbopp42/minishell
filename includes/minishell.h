@@ -19,7 +19,9 @@
 # include <pwd.h>
 # include <termios.h>
 # include <term.h>
-# include <curses.h>
+# include <dirent.h>
+
+# include <stdio.h>
 
 typedef struct	s_info
 {
@@ -35,6 +37,7 @@ void	del_array(char *array[]);
 void	del_lst(t_lst *lst);
 int		error_arg_env(void);
 void	exec_command(char *array[], t_lst *env);
+void	find_cmd(char **line, t_lst *env_lst);
 void	ft_cd(char **array, t_lst **env);
 void	ft_echo(char **array);
 void	ft_env(t_lst *env);
@@ -49,6 +52,7 @@ void	manage_signal(void);
 void	minishell(t_lst **env_lst, char **last_line, char *line);
 void	parssing_line(char **line, t_lst *env_lst, char *last_line);
 void	print_signal(int signum);
+int		put_my_char(int c);
 void	ft_setenv(t_lst **env, char *var, char *valeur);
 void	signal_handle(int signal);
 t_info	*singleton(t_info *data);
