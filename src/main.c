@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
- 
-void	get_line(char **line, t_lst *env_lst)
+
+void		get_line(char **line, t_lst *env_lst)
 {
 	char	buff[4];
 	int		i;
@@ -40,17 +40,34 @@ void	get_line(char **line, t_lst *env_lst)
 	ft_putchar('\n');
 }
 
-int	put_my_char(int c)
+int			put_my_char(int c)
 {
 	write(1, &c, 1);
 	return (1);
 }
 
-int	main(void)
+static void	launch_minishell(t_lst **env_lst, char **last_line)
+{
+	char		*line;
+
+	line = NULL;
+	manage_signal();
+	write_promptsh();
+	get_line(&line, *env_lst);
+	if (line && line[0])
+	{
+		parssing_line(&line, *env_lst, *last_line);
+		(*last_line) ? free(*last_line) : 0;
+		*last_line = ft_strdup(line);
+		minishell(env_lst, last_line, line);
+	}
+	free(line);
+}
+
+int			main(void)
 {
 	t_lst		*env_lst;
 	char		*last_line;
-	char		*line;
 	extern char	**environ;
 
 	last_line = NULL;
@@ -58,20 +75,7 @@ int	main(void)
 	init_term();
 	env_lst = tab_to_list(environ);
 	while (42)
-	{
-		line = NULL;
-		manage_signal();
-		write_promptsh();
-		get_line(&line, env_lst);
-		if (line && line[0])
-		{
-			parssing_line(&line, env_lst, last_line);
-			(last_line) ? free(last_line) : 0;
-			last_line = ft_strdup(line);
-			minishell(&env_lst, &last_line, line);
-		}
-		free(line);
-	}
+		launch_minishell(&env_lst, &last_line);
 	del_lst(env_lst);
 	return (1);
 }
