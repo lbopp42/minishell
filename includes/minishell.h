@@ -36,7 +36,7 @@ void			del_array(char *array[]);
 void			del_lst(t_lst *lst);
 int				error_arg_env(void);
 void			exec_command(char *array[], t_lst *env);
-void			find_cmd(char **line, t_lst *env_lst);
+void			find_cmd(char **line, t_lst *env_lst, int *exec);
 void			ft_cd(char **array, t_lst **env);
 void			ft_echo(char **array);
 void			ft_env(t_lst *env);

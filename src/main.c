@@ -12,6 +12,44 @@
 
 #include "minishell.h"
 
+void		print_valid_char(int *exec, char *buff, int *sp, char **line)
+{
+	static int	quote = 0;
+	char		tmp;
+
+	ft_putchar(buff[0]);
+	if (ft_isspace(buff[0]) && sp == 0)
+		return ;
+	*line = ft_stradd(*line, buff);
+	if ((tmp = buff[0]) && (tmp == 34 || tmp == 39))
+	{
+		if (quote == 1)
+			quote = 0;
+		else
+			quote = 1;
+	}
+	if (quote == 0 && buff[0] == ';')
+		*exec = 0;
+	*sp = 1;
+}
+
+void		treat_char(char *buff, int *sp, char **line, t_lst *env_lst)
+{
+	static int	exec = 0;
+
+	if (ft_isprint(buff[0]) && !buff[1])
+		print_valid_char(&exec, buff, sp, line);
+	else if (buff[0] == 9 && !buff[1] && !exec)
+		find_cmd(line, env_lst, &exec);
+	else if (buff[0] == 12 && !buff[1])
+	{
+		tputs(tgetstr("cl", NULL), 1, &put_my_char);
+		write_promptsh();
+		ft_putstr(*line);
+	}
+	exec = (buff[0] == 10 && !buff[1]) ? 0 : exec;
+}
+
 void		get_line(char **line, t_lst *env_lst)
 {
 	char	buff[4];
@@ -27,16 +65,7 @@ void		get_line(char **line, t_lst *env_lst)
 		i = 0;
 		ft_bzero(buff, 4);
 		read(0, buff, 4);
-		if (ft_isprint(buff[0]) && !buff[1])
-		{
-			ft_putchar(buff[0]);
-			if (ft_isspace(buff[0]) && sp == 0)
-				continue ;
-			*line = ft_stradd(*line, buff);
-			sp = 1;
-		}
-		else if (buff[0] == 9 && !buff[1])
-			find_cmd(line, env_lst);
+		treat_char(buff, &sp, line, env_lst);
 	}
 	ft_putchar('\n');
 }

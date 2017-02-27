@@ -71,6 +71,7 @@ char	**add_builtins_in_array(char *exec_name, char **exec_array)
 			new_array = put_exec_in_array((char*)buil_array[i], new_array);
 		i++;
 	}
+	del_array(exec_array);
 	return (new_array);
 }
 

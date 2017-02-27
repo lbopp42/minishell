@@ -72,7 +72,7 @@ int		browse_path(char *word, t_lst *env_lst, char **line)
 	{
 		ft_putchar('\n');
 		print_array(exec_array);
-		del_array(exec_array);
+		exec_array ? del_array(exec_array) : 0;
 		return (1);
 	}
 }
@@ -81,21 +81,32 @@ int		browse_path(char *word, t_lst *env_lst, char **line)
 **	Warning if PATH is NULL;
 */
 
-void	find_cmd(char **line, t_lst *env_lst)
+void	find_cmd(char **line, t_lst *env_lst, int *exec)
 {
 	char	*word;
+	char	*tmp;
 
 	word = NULL;
-	if (ft_strrchr(*line, ' '))
-		word = ft_strrchr(*line, ' ') + 1;
-	else
+	tmp = NULL;
+	if (ft_strrchr(*line, ';') || !ft_strrchr(*line, ' '))
 	{
-		word = ft_strdup(*line);
-		if (browse_path(word, env_lst, line))
+		if (ft_strrchr(*line, ';') && !*exec)
+			word = ft_strtrim(ft_strrchr(*line, ';') + 1);
+		else if (!*exec)
+		{
+			tmp = ft_strdup(*line);
+			word = ft_strtrim(tmp);
+			free(tmp);
+		}
+		if (browse_path(word, env_lst, line) && !*exec)
 		{
 			write_promptsh();
 			ft_putstr(*line);
 		}
+		else
+			*exec = 1;
 		free(word);
 	}
+	else
+		word = ft_strrchr(*line, ' ') + 1;
 }

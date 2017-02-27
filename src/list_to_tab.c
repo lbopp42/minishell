@@ -98,6 +98,8 @@ void	del_array(char *array[])
 	int i;
 
 	i = 0;
+	if (!array || !array[0])
+		return ;
 	while (array[i])
 	{
 		free(array[i]);
