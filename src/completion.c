@@ -106,10 +106,10 @@ void	print_cmd(char *word, char *cmd, char **line)
 	int	i;
 
 	i = ft_strlen(word);
+	*line = ft_stradd(*line, &(cmd[i]));
 	while (cmd[i])
 	{
 		ft_putchar(cmd[i]);
-		*line = ft_stradd(*line, &(cmd[i]));
 		i++;
 	}
 	ft_putchar(' ');
