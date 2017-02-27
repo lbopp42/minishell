@@ -35,14 +35,17 @@ char	**extract_exec(char *word, char **array_path)
 	char			**exec_array;
 
 	i = 0;
-	while (array_path[i])
+	exec_array = NULL;
+	while (array_path && array_path[i])
 	{
 		if (!(dir = opendir(array_path[i++])))
 			continue ;
 		while ((readding = readdir(dir)))
+		{
 			if (!ft_strncmp(readding->d_name, word, ft_strlen(word)) &&
 				readding->d_name[0] != '.')
 				exec_array = put_exec_in_array(readding->d_name, exec_array);
+		}
 		closedir(dir);
 	}
 	return (exec_array);
@@ -54,6 +57,7 @@ int		browse_path(char *word, t_lst *env_lst, char **line)
 	char	**array_path;
 
 	exec_array = NULL;
+	array_path = NULL;
 	array_path = ft_strsplit(get_env_var("PATH", env_lst), ':');
 	exec_array = extract_exec(word, array_path);
 	exec_array = add_builtins_in_array(word, exec_array);
@@ -78,12 +82,13 @@ void	find_cmd(char **line, t_lst *env_lst)
 {
 	char	*word;
 
+	word = NULL;
 	if (ft_strrchr(*line, ' '))
 		word = ft_strrchr(*line, ' ') + 1;
 	else
 	{
 		word = ft_strdup(*line);
-		if (browse_path(word, env_lst, line))
+		if (browse_path(word, env_lst, line))   //<-- Dans browse_path
 		{
 			write_promptsh();
 			ft_putstr(*line);

@@ -16,12 +16,9 @@ void	init_term(void)
 {
 	char			*term;
 	struct termios	attr;
-	t_info			*info;
 
-	info = singleton(NULL);
-	tcgetattr(STDIN_FILENO, &info->init_term);
+	tcgetattr(STDIN_FILENO, &g_init_term);
 	tcgetattr(STDIN_FILENO, &attr);
-	singleton(info);
 	attr.c_lflag &= ~(ECHO | ICANON);
 	attr.c_cc[VMIN] = 1;
 	attr.c_cc[VTIME] = 0;
@@ -38,9 +35,6 @@ void	init_term(void)
 
 void	default_term(void)
 {
-	t_info	*info;
-
-	info = singleton(NULL);
-	tcsetattr(STDIN_FILENO, TCSADRAIN, &info->init_term);
+	tcsetattr(STDIN_FILENO, TCSADRAIN, &g_init_term);
 	tgetent(NULL, getenv("TERM"));
 }

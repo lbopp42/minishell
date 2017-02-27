@@ -71,7 +71,6 @@ int			main(void)
 	extern char	**environ;
 
 	last_line = NULL;
-	init_sigleton();
 	init_term();
 	env_lst = tab_to_list(environ);
 	while (42)

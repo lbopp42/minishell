@@ -6,7 +6,7 @@
 #    By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/02 11:07:10 by lbopp             #+#    #+#              #
-#    Updated: 2017/02/27 09:44:30 by lbopp            ###   ########.fr        #
+#    Updated: 2017/02/27 12:56:42 by lbopp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,6 @@ SRC_NAME = array_completion.c\
 		   prompt.c\
 		   setenv.c\
 		   signal.c\
-		   singleton.c\
 		   term.c\
 		   verif_access.c
 SRC_PATH = src

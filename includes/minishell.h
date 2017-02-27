@@ -21,10 +21,9 @@
 # include <term.h>
 # include <dirent.h>
 
-typedef struct	s_info
-{
-	struct termios	init_term;
-}				t_info;
+#include <stdio.h>
+
+struct termios	g_init_term;
 
 char			**add_builtins_in_array(char *exec_name, char **exec_array);
 void			add_lst(t_lst **lst, char *array);
@@ -45,7 +44,6 @@ void			ft_exit(void);
 void			ft_unsetenv(t_lst *env, char *name);
 char			*get_env_var(char *origin, t_lst *env);
 char			*get_path(t_lst *env, char *command);
-void			init_sigleton(void);
 void			init_term(void);
 char			**list_to_tab(t_lst *lst);
 void			manage_signal(void);
@@ -57,7 +55,6 @@ char			**put_exec_in_array(char *exec_name, char **exec_array);
 int				put_my_char(int c);
 void			ft_setenv(t_lst **env, char *var, char *valeur);
 void			signal_handle(int signal);
-t_info			*singleton(t_info *data);
 t_lst			*tab_to_list(char *array[]);
 char			**transf_var(int *let, t_lst **env, int *wd, char *array[]);
 char			**transf_var2(char *array[], int *wd,
