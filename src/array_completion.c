@@ -49,6 +49,7 @@ char	**put_exec_in_array(char *exec_name, char **exec_array)
 	{
 		new_array = cpy_array_in_array(exec_array);
 		new_array[ft_arraylen(exec_array)] = ft_strdup(exec_name);
+		del_array(exec_array);
 		return (new_array);
 	}
 }

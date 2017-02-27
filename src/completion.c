@@ -60,16 +60,19 @@ int		browse_path(char *word, t_lst *env_lst, char **line)
 	array_path = NULL;
 	array_path = ft_strsplit(get_env_var("PATH", env_lst), ':');
 	exec_array = extract_exec(word, array_path);
+	del_array(array_path);
 	exec_array = add_builtins_in_array(word, exec_array);
 	if (exec_array && ft_arraylen(exec_array) == 1)
 	{
 		print_cmd(word, exec_array[0], line);
+		del_array(exec_array);
 		return (0);
 	}
 	else
 	{
 		ft_putchar('\n');
 		print_array(exec_array);
+		del_array(exec_array);
 		return (1);
 	}
 }
@@ -88,10 +91,11 @@ void	find_cmd(char **line, t_lst *env_lst)
 	else
 	{
 		word = ft_strdup(*line);
-		if (browse_path(word, env_lst, line))   //<-- Dans browse_path
+		if (browse_path(word, env_lst, line))
 		{
 			write_promptsh();
 			ft_putstr(*line);
 		}
+		free(word);
 	}
 }

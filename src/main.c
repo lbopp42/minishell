@@ -21,6 +21,7 @@ void		get_line(char **line, t_lst *env_lst)
 	sp = 0;
 	if (!(*line = ft_strnew(1)))
 		return ;
+	ft_bzero(buff, 4);
 	while (buff[0] != 10)
 	{
 		i = 0;
