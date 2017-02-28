@@ -55,10 +55,23 @@ static void	launch_execve(char *array[], t_lst *env_lst, char *path)
 		execve(path, array, env);
 }
 
+int			check_path(char *path, char **array)
+{
+	struct stat st;
+
+	if ((lstat(path, &st) != -1 && !S_ISREG(st.st_mode))
+			|| access(path, X_OK) != 0)
+	{
+		ft_putendstr_fd("minishell: permission denied: ", array[0], 2);
+		write(2, "\n", 1);
+		return (0);
+	}
+	return (1);
+}
+
 void		exec_command(char *array[], t_lst *env_lst)
 {
 	char		*path;
-	struct stat st;
 
 	path = NULL;
 	if (ft_strchr(array[0], '/') || env_lst == NULL)
@@ -76,10 +89,9 @@ void		exec_command(char *array[], t_lst *env_lst)
 		path = get_path(env_lst, array[0]);
 	if (path)
 	{
-		if ((lstat(path, &st) != -1 && !S_ISREG(st.st_mode))
-			|| access(path, X_OK) != 0)
+		if (!check_path(path, array))
 		{
-			ft_putendstr_fd("minishell: permission denied: ", array[0], 2);
+			free(path);
 			return ;
 		}
 		launch_execve(array, env_lst, path);

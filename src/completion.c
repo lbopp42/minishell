@@ -12,19 +12,19 @@
 
 #include "minishell.h"
 
-void	print_cmd(char *word, char *cmd, char **line)
+void	print_cmd(char *word, char *cmd)
 {
 	int	i;
 
 	i = ft_strlen(word);
-	*line = ft_stradd(*line, &(cmd[i]));
+	g_line = ft_stradd(g_line, &(cmd[i]));
 	while (cmd[i])
 	{
 		ft_putchar(cmd[i]);
 		i++;
 	}
 	ft_putchar(' ');
-	*line = ft_stradd(*line, " ");
+	g_line = ft_stradd(g_line, " ");
 }
 
 char	**extract_exec(char *word, char **array_path)
@@ -51,7 +51,7 @@ char	**extract_exec(char *word, char **array_path)
 	return (exec_array);
 }
 
-int		browse_path(char *word, t_lst *env_lst, char **line)
+int		browse_path(char *word, t_lst *env_lst)
 {
 	char	**exec_array;
 	char	**array_path;
@@ -64,7 +64,7 @@ int		browse_path(char *word, t_lst *env_lst, char **line)
 	exec_array = add_builtins_in_array(word, exec_array);
 	if (exec_array && ft_arraylen(exec_array) == 1)
 	{
-		print_cmd(word, exec_array[0], line);
+		print_cmd(word, exec_array[0]);
 		del_array(exec_array);
 		return (0);
 	}
@@ -81,32 +81,32 @@ int		browse_path(char *word, t_lst *env_lst, char **line)
 **	Warning if PATH is NULL;
 */
 
-void	find_cmd(char **line, t_lst *env_lst, int *exec)
+void	find_cmd(t_lst *env_lst, int *exec)
 {
 	char	*word;
 	char	*tmp;
 
 	word = NULL;
 	tmp = NULL;
-	if (ft_strrchr(*line, ';') || !ft_strrchr(*line, ' '))
+	if (ft_strrchr(g_line, ';') || !ft_strrchr(g_line, ' '))
 	{
-		if (ft_strrchr(*line, ';') && !*exec)
-			word = ft_strtrim(ft_strrchr(*line, ';') + 1);
+		if (ft_strrchr(g_line, ';') && !*exec)
+			word = ft_strtrim(ft_strrchr(g_line, ';') + 1);
 		else if (!*exec)
 		{
-			tmp = ft_strdup(*line);
+			tmp = ft_strdup(g_line);
 			word = ft_strtrim(tmp);
 			free(tmp);
 		}
-		if (browse_path(word, env_lst, line) && !*exec)
+		if (browse_path(word, env_lst) && !*exec)
 		{
 			write_promptsh();
-			ft_putstr(*line);
+			ft_putstr(g_line);
 		}
 		else
 			*exec = 1;
 		free(word);
 	}
 	else
-		word = ft_strrchr(*line, ' ') + 1;
+		word = ft_strrchr(g_line, ' ') + 1;
 }

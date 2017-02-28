@@ -27,6 +27,8 @@ void	fill_env(t_lst **env, char *var, char *valeur)
 	}
 	else
 	{
+		while (tmp->next)
+			tmp = tmp->next;
 		if (!(tmp->next = (t_lst*)malloc(sizeof(t_lst))))
 			return ;
 		tmp->next->name = ft_strdup(var);

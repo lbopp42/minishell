@@ -16,21 +16,26 @@ void	signal_handle(int signal)
 {
 	(void)signal;
 	if (signal == SIGINT)
+	{
+		signal = 0;
+		g_line = NULL;
+		g_line = ft_strnew(1);
 		write_promptsh();
+	}
 	return ;
 }
 
-void	clean_up(char *last_line, char *line, char ***command, char **array)
+void	clean_up(char *last_line, char ***command, char **array)
 {
 	free(last_line);
-	free(line);
+	free(g_line);
 	del_array(*command);
 	*command = NULL;
 	del_array(array);
 	ft_exit();
 }
 
-void	minishell(t_lst **env_lst, char **last_line, char *line)
+void	minishell(t_lst **env_lst, char **last_line)
 {
 	char		**command;
 	char		**array;
@@ -40,7 +45,7 @@ void	minishell(t_lst **env_lst, char **last_line, char *line)
 
 	array = NULL;
 	command = NULL;
-	array = ft_strsplitquote(line, ';');
+	array = ft_strsplitquote(g_line, ';');
 	i = 0;
 	while (array && array[i])
 	{
@@ -48,7 +53,7 @@ void	minishell(t_lst **env_lst, char **last_line, char *line)
 		if (command && treatment_builtins(command, env_lst) == 0)
 		{
 			del_lst(*env_lst);
-			clean_up(*last_line, line, &command, array);
+			clean_up(*last_line, &command, array);
 		}
 		else if (command && !ft_isinarray(command[0], (char**)array_cmd))
 			exec_command(command, *env_lst);

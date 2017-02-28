@@ -24,6 +24,7 @@
 
 # include <stdio.h>
 
+char			*g_line;
 struct termios	g_init_term;
 
 char			**add_builtins_in_array(char *exec_name, char **exec_array);
@@ -37,7 +38,7 @@ void			del_array(char *array[]);
 void			del_lst(t_lst *lst);
 int				error_arg_env(void);
 void			exec_command(char *array[], t_lst *env);
-void			find_cmd(char **line, t_lst *env_lst, int *exec);
+void			find_cmd(t_lst *env_lst, int *exec);
 void			ft_cd(char **array, t_lst **env);
 void			ft_echo(char **array);
 void			ft_env(t_lst *env);
@@ -48,8 +49,8 @@ char			*get_path(t_lst *env, char *command);
 void			init_term(void);
 char			**list_to_tab(t_lst *lst);
 void			manage_signal(void);
-void			minishell(t_lst **env_lst, char **last_line, char *line);
-void			parssing_line(char **line, t_lst *env_lst, char *last_line);
+void			minishell(t_lst **env_lst, char **last_line);
+void			parssing_line(t_lst *env_lst, char *last_line);
 void			print_array(char **array);
 void			print_signal(int signum);
 char			**put_exec_in_array(char *exec_name, char **exec_array);
