@@ -57,7 +57,8 @@ static void	launch_execve(char *array[], t_lst *env_lst, char *path)
 
 void		exec_command(char *array[], t_lst *env_lst)
 {
-	char	*path;
+	char		*path;
+	struct stat st;
 
 	path = NULL;
 	if (ft_strchr(array[0], '/') || env_lst == NULL)
@@ -74,6 +75,14 @@ void		exec_command(char *array[], t_lst *env_lst)
 	if (!path)
 		path = get_path(env_lst, array[0]);
 	if (path)
+	{
+		if ((lstat(path, &st) != -1 && !S_ISREG(st.st_mode))
+			|| access(path, X_OK) != 0)
+		{
+			ft_putendstr_fd("minishell: permission denied: ", array[0], 2);
+			return ;
+		}
 		launch_execve(array, env_lst, path);
+	}
 	return ;
 }

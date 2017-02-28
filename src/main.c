@@ -39,7 +39,7 @@ void		treat_char(char *buff, int *sp, char **line, t_lst *env_lst)
 
 	if (ft_isprint(buff[0]) && !buff[1])
 		print_valid_char(&exec, buff, sp, line);
-	else if (buff[0] == 9 && !buff[1] && !exec)
+	else if (buff[0] == 9 && !buff[1] && env_lst && ft_isenv(env_lst, "PATH"))
 		find_cmd(line, env_lst, &exec);
 	else if (buff[0] == 12 && !buff[1])
 	{

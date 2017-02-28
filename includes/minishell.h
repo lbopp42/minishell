@@ -20,8 +20,9 @@
 # include <termios.h>
 # include <term.h>
 # include <dirent.h>
+# include <sys/stat.h>
 
-#include <stdio.h>
+# include <stdio.h>
 
 struct termios	g_init_term;
 
