@@ -85,8 +85,7 @@ void		exec_command(char *array[], t_lst *env_lst)
 			return ;
 		}
 	}
-	if (!path)
-		path = get_path(env_lst, array[0]);
+	path = (!path) ? get_path(env_lst, array[0]) : path;
 	if (path)
 	{
 		if (!check_path(path, array))

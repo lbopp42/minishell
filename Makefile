@@ -6,7 +6,7 @@
 #    By: lbopp <lbopp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/02 11:07:10 by lbopp             #+#    #+#              #
-#    Updated: 2017/02/28 13:34:26 by lbopp            ###   ########.fr        #
+#    Updated: 2017/02/28 15:47:32 by lbopp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,12 +26,14 @@ SRC_NAME = array_completion.c\
 		   list_to_tab.c\
 		   tab_to_list.c\
 		   treatment_builtins.c\
+		   treat_line.c\
 		   main.c\
 		   minishell.c\
 		   parssing_env.c\
 		   prompt.c\
 		   setenv.c\
 		   signal.c\
+		   singleton.c\
 		   term.c\
 		   verif_access.c
 SRC_PATH = src

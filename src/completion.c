@@ -77,17 +77,12 @@ int		browse_path(char *word, t_lst *env_lst)
 	}
 }
 
-/*
-**	Warning if PATH is NULL;
-*/
-
 void	find_cmd(t_lst *env_lst, int *exec)
 {
 	char	*word;
 	char	*tmp;
 
 	word = NULL;
-	tmp = NULL;
 	if (ft_strrchr(g_line, ';') || !ft_strrchr(g_line, ' '))
 	{
 		if (ft_strrchr(g_line, ';') && !*exec)

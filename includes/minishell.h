@@ -22,8 +22,6 @@
 # include <dirent.h>
 # include <sys/stat.h>
 
-# include <stdio.h>
-
 char			*g_line;
 struct termios	g_init_term;
 
@@ -45,6 +43,7 @@ void			ft_env(t_lst *env);
 void			ft_exit(void);
 void			ft_unsetenv(t_lst *env, char *name);
 char			*get_env_var(char *origin, t_lst *env);
+void			get_line(t_lst *env_lst);
 char			*get_path(t_lst *env, char *command);
 void			init_term(void);
 char			**list_to_tab(t_lst *lst);
@@ -57,6 +56,7 @@ char			**put_exec_in_array(char *exec_name, char **exec_array);
 int				put_my_char(int c);
 void			ft_setenv(t_lst **env, char *var, char *valeur);
 void			signal_handle(int signal);
+int				singleton_prompt(int data);
 t_lst			*tab_to_list(char *array[]);
 char			**transf_var(int *let, t_lst **env, int *wd, char *array[]);
 char			**transf_var2(char *array[], int *wd,
@@ -64,7 +64,5 @@ char			**transf_var2(char *array[], int *wd,
 int				treatment_builtins(char *array[], t_lst **env);
 char			*verif_access(t_lst *env, char *command);
 void			write_promptsh(void);
-
-int			singleton_prompt(int data);
 
 #endif
