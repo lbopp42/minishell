@@ -65,4 +65,6 @@ int				treatment_builtins(char *array[], t_lst **env);
 char			*verif_access(t_lst *env, char *command);
 void			write_promptsh(void);
 
+int			singleton_prompt(int data);
+
 #endif

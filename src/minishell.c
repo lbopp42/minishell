@@ -14,13 +14,16 @@
 
 void	signal_handle(int signal)
 {
-	(void)signal;
+	int	prompt;
+
+	prompt = singleton_prompt(0);
 	if (signal == SIGINT)
 	{
+		if (prompt == 1)
+			write_promptsh();
 		signal = 0;
 		g_line = NULL;
 		g_line = ft_strnew(1);
-		write_promptsh();
 	}
 	return ;
 }

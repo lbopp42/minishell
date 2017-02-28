@@ -76,12 +76,23 @@ int			put_my_char(int c)
 	return (1);
 }
 
+int			singleton_prompt(int data)
+{
+	static int	prompt;
+
+	if (data)
+		prompt = data;
+	return (prompt);
+}
+
 static void	launch_minishell(t_lst **env_lst, char **last_line)
 {
 	g_line = NULL;
+	singleton_prompt(1);
 	manage_signal();
 	write_promptsh();
 	get_line(*env_lst);
+	singleton_prompt(2);
 	if (g_line && g_line[0])
 	{
 		parssing_line(*env_lst, *last_line);
@@ -103,6 +114,5 @@ int			main(void)
 	env_lst = tab_to_list(environ);
 	while (42)
 		launch_minishell(&env_lst, &last_line);
-	del_lst(env_lst);
 	return (1);
 }
